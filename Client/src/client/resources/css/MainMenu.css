@@ -1,0 +1,6 @@
+Button{
+    -fx-pref-width: 300px;
+    -fx-pref-height: 150px;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}

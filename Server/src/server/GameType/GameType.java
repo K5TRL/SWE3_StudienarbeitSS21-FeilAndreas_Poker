@@ -3,10 +3,12 @@ package server.GameType;
 public abstract class GameType {
     private final int amountOfCardsAllowedOnHand;
     private final String nameOfTheGame;
+    private final int amountOfBettingRoundsAllowedPerGame;
 
-    protected GameType(int amountOfCardsAllowedOnHand, String nameOfTheGame){
+    protected GameType(int amountOfCardsAllowedOnHand, String nameOfTheGame, int amountOfBettingRoundsAllowedPerGame){
         this.amountOfCardsAllowedOnHand = amountOfCardsAllowedOnHand;
         this.nameOfTheGame = nameOfTheGame;
+        this.amountOfBettingRoundsAllowedPerGame = amountOfBettingRoundsAllowedPerGame;
     }
 
     public int getAmountOfCardsAllowedOnHand(){
@@ -15,5 +17,10 @@ public abstract class GameType {
     public String getNameOfTheGame(){
         return nameOfTheGame;
     }
+    public int getAmountOfBettingRoundsAllowedPerGame(){
+        return amountOfBettingRoundsAllowedPerGame;
+    }
+    public void executeCurrentRoundRules(){}
+    //public void moveToNextRound(){}
 
 }

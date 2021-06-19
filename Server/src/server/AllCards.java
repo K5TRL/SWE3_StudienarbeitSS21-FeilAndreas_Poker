@@ -7,10 +7,12 @@ import server.Card.CardSuit;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Stack;
 
 public class AllCards {
     private static AllCards instance;
-    private ArrayList<Card> allCards;
+    //TODO: CHANGE TO STACK
+    private Stack<Card> allCards;
 
     private AllCards(){
 
@@ -34,16 +36,25 @@ public class AllCards {
 
     public void shuffleDeck(){
         ArrayList<Card> tempArrayList = new ArrayList<>();
+        int amountOfCardsLeftToIterateOver = allCards.size();
         for(int i = 0; i<allCards.size(); i++){
-            int position = (int)(Math.random()* allCards.size());
-            Card tempCard = allCards.get(position);
+            //int position = (int)(Math.random()* allCards.size());
+            Card tempCard = allCards.get((int)(Math.random()* amountOfCardsLeftToIterateOver));
+            amountOfCardsLeftToIterateOver--;
             tempArrayList.add(tempCard);
-            allCards.remove(tempCard);
         }
-        allCards = tempArrayList;
+        allCards.clear();
+        for(Card card : tempArrayList){
+            allCards.push(card);
+        }
     }
 
     public Card getRandomCard(){
-        return (Card) allCards.get((int)Math.random()*allCards.size());
+        return allCards.pop();
+    }
+
+    //IT IS TRADITION TO BURN A CARD BEFORE PLAYING THE FLOP, TURN AND RIVER
+    public void burnCard(){
+        allCards.pop();
     }
 }

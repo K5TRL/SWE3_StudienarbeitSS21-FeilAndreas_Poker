@@ -11,16 +11,25 @@ public class Pot {
         amountOfWinningsInPot = 0;
     }
 
-    public void increasPotBy(){
-
+    public void increasPotBy(int amount){
+        amountOfWinningsInPot+=amount;
     }
 
-    public void payOutPot(){
-        for(Player player : playersEligibleForWinnings){
-            if(true /*TODO: VALIDATION: IS PLAYER WITH HIGHEST HAND ELIGIBLE FOR THIS POT? IF NOT CONTINUE. QUESTION: WHERE DO WE VALIDATE A CHRONOLOGICAL ORDER OF PLAYERS BASED ON STRENGTH OF HAND?*/){
-                player.addFunds(amountOfWinningsInPot);
-                amountOfWinningsInPot = 0;
-            }
-        }
+//    public void payOutPot(){
+//        for(Player player : playersEligibleForWinnings){
+//            if(true /*TODO: VALIDATION: IS PLAYER WITH HIGHEST HAND ELIGIBLE FOR THIS POT? IF NOT CONTINUE. QUESTION: WHERE DO WE VALIDATE A CHRONOLOGICAL ORDER OF PLAYERS BASED ON STRENGTH OF HAND?*/){
+//                player.addFunds(amountOfWinningsInPot);
+//                amountOfWinningsInPot = 0;
+//            }
+//        }
+//    }
+
+    public ArrayList<Player> getPlayersEligibleForWinnings(){
+        return playersEligibleForWinnings;
+    }
+
+    public void payoutTo(Player player){
+        player.addFunds(amountOfWinningsInPot);
+        amountOfWinningsInPot = 0;
     }
 }

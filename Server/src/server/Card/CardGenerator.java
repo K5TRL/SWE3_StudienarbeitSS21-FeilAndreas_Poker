@@ -2,6 +2,7 @@ package server.Card;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.Stack;
 
 public class CardGenerator {
 
@@ -15,11 +16,11 @@ public class CardGenerator {
         }
         return instance;
     }
-    public ArrayList<Card> createFullDeck(){
-        ArrayList<Card> allCards = new ArrayList<>();
+    public Stack<Card> createFullDeck(){
+        Stack<Card> allCards = new Stack<>();
         EnumSet.allOf(CardSuit.class).forEach(cardSuit -> {
             for(int i = 0; i<13; i++){
-                allCards.add(new Card(i, cardSuit));
+                allCards.push(new Card(i, cardSuit));
             }
         });
         return allCards;

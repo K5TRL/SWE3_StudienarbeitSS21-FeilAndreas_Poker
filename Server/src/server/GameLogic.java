@@ -13,7 +13,7 @@ public class GameLogic {
     private GameType currentGameBeingPlayed;
 
     private GameLogic(){
-
+        setCurrentGameBeingPlayedToTexasHoldEm();
     }
     public static GameLogic getInstance(){
         if(instance==null){
@@ -22,12 +22,12 @@ public class GameLogic {
         return instance;
     }
 
-    public void setCurrentGameBeingPlayedToTexasHoldEm(GameType gameType){
-        //currentGameBeingPlayed = new TexasHoldEm();
+    public void setCurrentGameBeingPlayedToTexasHoldEm(){
+        currentGameBeingPlayed = new TexasHoldEm();
     }
 
     public GameType getCurrentGameBeingPlayed(){
-        return new TexasHoldEm();
+        return currentGameBeingPlayed;
         //return currentGameBeingPlayed;
     }
 
@@ -56,6 +56,10 @@ public class GameLogic {
         PlayerManagement.getInstance().getAllPlayers().forEach(player -> {
             player.setFunds(BUY_IN);
         });
+    }
+
+    public void executeCurrentRoundRules(){
+        currentGameBeingPlayed.executeCurrentRoundRules();
     }
 
 

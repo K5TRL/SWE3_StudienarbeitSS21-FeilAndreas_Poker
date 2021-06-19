@@ -8,8 +8,16 @@ import java.util.ArrayList;
 
 public class TexasHoldEm extends GameType{
 
+    private static final int MAX_CARDS_ON_HAND = 2;
+    private static final String NAME_OF_THE_GAME = "Texas Hold 'Em";
+    private static final int MAX_BETTING_ROUNDS = 4;
+
     public TexasHoldEm() {
-        super(5, "Texas Hold 'Em", 4);
+        super(MAX_CARDS_ON_HAND, NAME_OF_THE_GAME, MAX_BETTING_ROUNDS);
+    }
+
+    protected TexasHoldEm(int maxCardsOnHand, String nameOfTheGame, int maxBettingRounds) {
+        super(maxCardsOnHand,nameOfTheGame,maxBettingRounds);
     }
     //private static final int AMOUNT_OF_ROUNDS = 3;
 
@@ -25,12 +33,18 @@ public class TexasHoldEm extends GameType{
                 initateRiver();
                 break;
             default:
+                payBlinds();
                 break;
         }
+    }
+
+    public void payBlinds() {
+
     }
     //public void moveToNextRound(){}
 
     public ArrayList initiateFlop(){
+        AllCards.getInstance().burnCard();
         ArrayList<Card> list = new ArrayList();
         for(int i = 0; i<3; i++){
             list.add(AllCards.getInstance().getRandomCard());
@@ -39,6 +53,7 @@ public class TexasHoldEm extends GameType{
     }
 
     public ArrayList initiateTurn(){
+        AllCards.getInstance().burnCard();
         ArrayList<Card> list = new ArrayList();
         for(int i = 0; i<1; i++){
             list.add(AllCards.getInstance().getRandomCard());
@@ -47,6 +62,7 @@ public class TexasHoldEm extends GameType{
     }
 
     public ArrayList initateRiver(){
+        AllCards.getInstance().burnCard();
         ArrayList<Card> list = new ArrayList();
         for(int i = 0; i<1; i++){
             list.add(AllCards.getInstance().getRandomCard());

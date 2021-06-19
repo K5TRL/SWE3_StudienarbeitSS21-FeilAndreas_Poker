@@ -17,4 +17,8 @@ public class Card implements ICard {
         return this;
     }
 
+    public int getValue(){
+        return value;
+    }
+
 }

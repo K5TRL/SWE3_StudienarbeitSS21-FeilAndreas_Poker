@@ -34,6 +34,7 @@ public class GameLogic {
     public void prepareNewGame(){
         preparePlayersForNewGame();
         RoundLogic.getInstance().resetBettingRoundForNewGame();
+        PlayerManagement.getInstance().setDealerAndBlindsForNewGame();
     }
 
     public void prepareNewRound(){

@@ -1,6 +1,7 @@
 package server.game_type;
 
 import server.card.AllCards;
+import server.player.PlayerManagement;
 import server.settings.Blinds;
 import server.card.Card;
 import server.round.RoundLogic;
@@ -43,8 +44,8 @@ public class TexasHoldEm extends GameType{
     }
 
     public void payBlinds() {
-        RoundLogic.getInstance().getSmallBlindPlayer().bet(Blinds.getInstance().getSmallBlindAmount());
-        RoundLogic.getInstance().getBigBlindPlayer().bet(Blinds.getInstance().getBigBlindAmount());
+        PlayerManagement.getInstance().getSmallBlindPlayer().bet(Blinds.getInstance().getSmallBlindAmount());
+        PlayerManagement.getInstance().getBigBlindPlayer().bet(Blinds.getInstance().getBigBlindAmount());
     }
     //public void moveToNextRound(){}
 

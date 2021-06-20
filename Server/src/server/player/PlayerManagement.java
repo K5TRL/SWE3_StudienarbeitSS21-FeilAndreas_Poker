@@ -12,13 +12,19 @@ public class PlayerManagement {
     private Player currentPlayerBetting;
 
     private PlayerManagement(){
-
+        //setDealerAndBlindsForNewGame();
     }
     public static PlayerManagement getInstance(){
         if(instance==null){
             instance = new PlayerManagement();
         }
         return instance;
+    }
+
+    public void setDealerAndBlindsForNewGame(){
+        dealer = allPlayers.get(((int)Math.random()* allPlayers.size())% allPlayers.size());
+        smallBlind = allPlayers.get((allPlayers.indexOf(dealer)+1)% allPlayers.size());
+        bigBlind = allPlayers.get((allPlayers.indexOf(dealer)+2)% allPlayers.size());
     }
 
     public void addPlayer(Player player){
@@ -34,7 +40,11 @@ public class PlayerManagement {
         bigBlind = allPlayers.get((allPlayers.indexOf(bigBlind)+1)%allPlayers.size());
         smallBlind = allPlayers.get((allPlayers.indexOf(smallBlind)+1)% allPlayers.size());
     }
-
-
+    public Player getSmallBlindPlayer(){
+        return smallBlind;
+    }
+    public Player getBigBlindPlayer(){
+        return bigBlind;
+    }
 
 }

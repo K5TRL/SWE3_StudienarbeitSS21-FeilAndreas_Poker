@@ -20,6 +20,7 @@ public class SingleBettingRound {
         potsCreatedInThisRound.add(new Pot(PlayerManagement.getInstance().getAllPlayers()));
         currentPot = potsCreatedInThisRound.get(0);
         ArrayList<Player> allPlayers = PlayerManagement.getInstance().getAllPlayers();
+        currentPlayerBetting = PlayerManagement.getInstance().getSmallBlindPlayer();
     }
 
     //TODO: create side-pot if one player doesn't have the funds to bet along but still went all in.

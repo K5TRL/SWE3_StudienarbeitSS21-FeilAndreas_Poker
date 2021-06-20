@@ -4,9 +4,9 @@ import server.GameLogic;
 import server.player.Player;
 
 public class RoundLogic {
-    private Player currentDealer;
-    private Player smallBlind;
-    private Player bigBlind;
+//    private Player currentDealer;
+//    private Player smallBlind;
+//    private Player bigBlind;
 
     //IMPORTANT FOR GAMETYPE
     private int currentBettingRoundNumber;
@@ -44,14 +44,17 @@ public class RoundLogic {
         }
     }
 
-    public Player getSmallBlindPlayer(){
-        return smallBlind;
-    }
-    public Player getBigBlindPlayer(){
-        return bigBlind;
-    }
-    public SingleBettingRound getCurrentBettingRound(){
+//    public Player getSmallBlindPlayer(){
+//        return smallBlind;
+//    }
+//    public Player getBigBlindPlayer(){
+//        return bigBlind;
+//    }
+    private SingleBettingRound getCurrentBettingRound(){
         return currentRound;
+    }
+    public void moveToNextPlayer(){
+        currentRound.switchToNextBettingPlayer();
     }
 
 }

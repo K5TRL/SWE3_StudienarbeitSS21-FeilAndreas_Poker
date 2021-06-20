@@ -25,3 +25,43 @@ i
 9RemoteInterfaces/src/remoteInterfaces/IPlayerActions.java,3\7\378fb6ef862c82e3a32cf70a1e371ad451df06c9
 Y
 )Server/src/server/Card/CardGenerator.java,3\2\3223bdd7aafca002ae9361f91c03fe2dec0c72fa
+Q
+!Server/src/server/ServerMain.java,0\f\0f3f46e73f1df90cbfe0ffd8cc4f4ec082e6dccf
+T
+$Server/src/server/card/AllCards.java,0\f\0fabf6471764e2c2de75a896b3200f3a1e8a6281
+V
+&Server/src/server/settings/Blinds.java,8\5\850d4b1bb641b44741894559db72e567af36b5ac
+P
+ Server/src/server/card/Card.java,4\8\48b196bb47a6649b4940a26360f763846567168f
+Y
+)Server/src/server/card/CardGenerator.java,2\0\20c58f3d7598eabfcb6f6341ea8fb0787b8887ef
+T
+$Server/src/server/card/CardSuit.java,5\4\54a68739233d5c14438fb09deec050b63c8f2fa3
+`
+0RemoteInterfaces/src/remoteInterfaces/ICard.java,3\6\36b426ed54f273f4968aed69a165c0113314ee3f
+V
+&Server/src/server/game_type/Omaha.java,0\8\088cd4a55a7f1241a9f3f0fba63543e35cd825a0
+T
+$Server/src/server/player/Player.java,a\6\a666954abd5a53ae2e14aebe83172b1c41b4fade
+T
+$Server/src/server/PlayerActions.java,f\c\fc9691f877f1741269bea6f1c1f5e57647293e03
+P
+ Server/src/server/table/Pot.java,7\9\79ec42a83c1c4a666f39c71042c442d069d81c4d
+^
+.Server/src/server/game_type/ShowdownLogic.java,3\8\38f2fa73e436d0405cdd7408b7b3c87d4126f2c0
+W
+'Server/src/server/table/PokerTable.java,2\c\2c425eae9159a9dc34fa40ca82e4779d41c8b27d
+W
+'Server/src/server/round/RoundLogic.java,8\1\813176e03ca10ff2fb2ba7f5e03db9ead69be735
+_
+/Server/src/server/round/SingleBettingRound.java,0\4\04b086055f0c26f9eb71f6ebf08f154a1e7d43b6
+P
+ Server/src/server/GameLogic.java,0\4\04da7ade93945580109a5d795606c66d165f128a
+Y
+)Server/src/server/game_type/GameType.java,6\1\612d2bf492c7a1884db6bf489aaae836d2200dfa
+\
+,Server/src/server/game_type/TexasHoldEm.java,2\8\28e1a28a9d78d0d458c94a231327a4e89de8d413
+^
+.Server/src/server/player/PlayerManagement.java,9\7\973ff03e0b54035839801f4e5f215761e2bddc0d
+U
+%Client/src/client/ClientLauncher.java,0\0\00b28e4523c96b68149d7250ad49d6b493c310de

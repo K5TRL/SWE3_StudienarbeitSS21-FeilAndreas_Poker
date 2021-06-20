@@ -1,5 +1,6 @@
 package client;
 
+import client.resources.controller.SceneController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
@@ -40,13 +41,18 @@ public class ClientMain extends Application {
         stage.setHeight(1080);
         stage.setFullScreen(true);
         stage.setTitle("Poker");
+
         Scene scene = new Scene(new HBox());
-        //SceneController sceneController = new SceneController(scene);
+        SceneController sceneController = new SceneController(scene);
         stage.setScene(scene);
         stage.show();
     }
 
-//    private static void startApp() {
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    //    private static void startApp() {
 //        SceneController.getInstance().loadMainMenu();
 //    }
 }

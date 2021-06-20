@@ -7,10 +7,10 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 
-<VBox xmlns="http://javafx.com/javafx"
+<VBox fx:id="vbMainMenu" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml">
     <Label fx:id="lblTitle" text="Poker App"/>
-    <VBox>
+    <VBox fx:id="vbButtons">
         <Button fx:id="btnStartTexasHoldEm" text="Texas Hold 'Em"/>
         <Button fx:id="btnQuitGame" text="Beenden"/>
     </VBox>

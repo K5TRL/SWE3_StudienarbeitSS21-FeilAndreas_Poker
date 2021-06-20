@@ -1,10 +1,11 @@
 package server;
 
-import javafx.scene.control.Alert;
-import server.GameType.GameType;
-import server.GameType.TexasHoldEm;
-
-import java.math.RoundingMode;
+import server.card.AllCards;
+import server.game_type.GameType;
+import server.game_type.TexasHoldEm;
+import server.player.Player;
+import server.player.PlayerManagement;
+import server.round.RoundLogic;
 
 public class GameLogic {
 
@@ -28,7 +29,6 @@ public class GameLogic {
 
     public GameType getCurrentGameBeingPlayed(){
         return currentGameBeingPlayed;
-        //return currentGameBeingPlayed;
     }
 
     public void prepareNewGame(){
@@ -39,6 +39,7 @@ public class GameLogic {
     public void prepareNewRound(){
         prepareAllCards();
         resetPlayersforNewRound();
+        RoundLogic.getInstance().newRound();
     }
 
     private void prepareAllCards(){
@@ -50,6 +51,12 @@ public class GameLogic {
         PlayerManagement.getInstance().getAllPlayers().forEach(player -> {
             player.throwAwayHand();
         });
+        //Has to be this way, since everyone gets one card at a time!
+        for(int i = 0; i<currentGameBeingPlayed.getAmountOfCardsAllowedOnHand(); i++){
+            for(Player player : PlayerManagement.getInstance().getAllPlayers()){
+                player.addCardToHand(AllCards.getInstance().getRandomCard());
+            }
+        }
     }
 
     private void preparePlayersForNewGame(){

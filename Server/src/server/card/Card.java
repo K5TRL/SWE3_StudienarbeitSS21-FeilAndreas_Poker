@@ -1,4 +1,4 @@
-package server.Card;
+package server.card;
 
 import remoteInterfaces.ICard;
 

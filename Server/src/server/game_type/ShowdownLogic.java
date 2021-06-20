@@ -1,10 +1,11 @@
-package server;
+package server.game_type;
 
-import server.Card.Card;
+import server.player.Player;
+import server.player.PlayerManagement;
+import server.GameLogic;
+import server.table.PokerTable;
+import server.table.Pot;
 
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 
 //FOR VALIDATION OF HANDS, DETERMINING WHICH HAND IS THE HIGHEST POSSIBLE FOR EACH PLAYER STILL IN PLAY + DETERMINING WHICH PLAYER WINS WHICH POT
@@ -34,6 +35,7 @@ public class ShowdownLogic {
                 }
             }
         }
+        GameLogic.getInstance().prepareNewRound();
     }
 
     public void createHierarchy(){

@@ -1,12 +1,6 @@
-package server;
-
-import server.Card.Card;
-import server.Card.CardGenerator;
-import server.Card.CardSuit;
+package server.card;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
 import java.util.Stack;
 
 public class AllCards {

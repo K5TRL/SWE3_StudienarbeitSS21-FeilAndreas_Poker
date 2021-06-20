@@ -1,4 +1,4 @@
-package server.GameType;
+package server.game_type;
 
 public abstract class GameType {
     private final int amountOfCardsAllowedOnHand;

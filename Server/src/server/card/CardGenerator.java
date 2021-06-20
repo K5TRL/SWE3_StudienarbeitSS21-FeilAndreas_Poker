@@ -1,6 +1,5 @@
-package server.Card;
+package server.card;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Stack;
 

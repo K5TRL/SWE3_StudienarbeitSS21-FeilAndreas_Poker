@@ -1,8 +1,9 @@
-package server.GameType;
+package server.game_type;
 
-import server.AllCards;
-import server.Card.Card;
-import server.RoundLogic;
+import server.card.AllCards;
+import server.settings.Blinds;
+import server.card.Card;
+import server.round.RoundLogic;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,10 @@ public class TexasHoldEm extends GameType{
     //private static final int AMOUNT_OF_ROUNDS = 3;
 
     public void executeCurrentRoundRules(){
-        switch (RoundLogic.getInstance().getCurrentBettingRound()){
+        switch (RoundLogic.getInstance().getCurrentBettingRoundNumber()){
+            case 0:
+                payBlinds();
+                break;
             case 1:
                 initiateFlop();
                 break;
@@ -33,13 +37,14 @@ public class TexasHoldEm extends GameType{
                 initateRiver();
                 break;
             default:
-                payBlinds();
+                ShowdownLogic.getInstance().payoutAllPots();
                 break;
         }
     }
 
     public void payBlinds() {
-
+        RoundLogic.getInstance().getSmallBlindPlayer().bet(Blinds.getInstance().getSmallBlindAmount());
+        RoundLogic.getInstance().getBigBlindPlayer().bet(Blinds.getInstance().getBigBlindAmount());
     }
     //public void moveToNextRound(){}
 

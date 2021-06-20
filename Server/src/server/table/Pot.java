@@ -1,4 +1,6 @@
-package server;
+package server.table;
+
+import server.player.Player;
 
 import java.util.ArrayList;
 
@@ -9,6 +11,24 @@ public class Pot {
     public Pot(ArrayList playersEligibleForWinnings){
         this.playersEligibleForWinnings = playersEligibleForWinnings;
         amountOfWinningsInPot = 0;
+        checkIfPotContested();
+    }
+
+    public Pot(ArrayList playersEligibleForWinnings, int amountOfWinningsInPot){
+        this.playersEligibleForWinnings = playersEligibleForWinnings;
+        this.amountOfWinningsInPot = amountOfWinningsInPot;
+        checkIfPotContested();
+    }
+
+    public int getAmountOfWinningsInPot(){
+        return amountOfWinningsInPot;
+    }
+
+    //TODO: MOVE TO CORRECT PLACE IN CODE:
+    private void checkIfPotContested(){
+        if(playersEligibleForWinnings.size()==1){
+            payoutTo(playersEligibleForWinnings.get(0));
+        }
     }
 
     public void increasPotBy(int amount){
@@ -31,5 +51,11 @@ public class Pot {
     public void payoutTo(Player player){
         player.addFunds(amountOfWinningsInPot);
         amountOfWinningsInPot = 0;
+    }
+
+    //IN CASE OF FOLD
+    public void removePlayerEligitability(Player player){
+        playersEligibleForWinnings.remove(player);
+        checkIfPotContested();
     }
 }

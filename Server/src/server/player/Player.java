@@ -1,6 +1,7 @@
-package server;
+package server.player;
 
-import server.Card.Card;
+import server.GameLogic;
+import server.card.Card;
 
 import java.util.ArrayList;
 
@@ -8,6 +9,7 @@ public class Player {
     private String name;
     private int funds;
     private ArrayList<Card> pocketCards;
+    private boolean folded;
 
     public Player(String name, int initialFunds){
         this.name = name;
@@ -22,7 +24,7 @@ public class Player {
     }
 
     public void addCardToHand(Card card){
-        if(pocketCards.size()<GameLogic.getInstance().getCurrentGameBeingPlayed().getAmountOfCardsAllowedOnHand()){
+        if(pocketCards.size()< GameLogic.getInstance().getCurrentGameBeingPlayed().getAmountOfCardsAllowedOnHand()){
             pocketCards.add(card);
         }
     }
@@ -52,5 +54,9 @@ public class Player {
             pointValue += card.getValue();
         }
         return pointValue;
+    }
+
+    public boolean hasFolded(){
+        return folded;
     }
 }

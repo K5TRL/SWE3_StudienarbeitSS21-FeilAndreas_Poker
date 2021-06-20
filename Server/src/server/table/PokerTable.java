@@ -1,6 +1,7 @@
-package server;
+package server.table;
 
-import server.Card.Card;
+import server.player.PlayerManagement;
+import server.card.Card;
 
 import java.util.ArrayList;
 
@@ -23,23 +24,27 @@ public class PokerTable {
 
     public void addPotToTable(Pot pot){
         potsInPlay.add(pot);
+        poolAllPossiblePots();
     }
 
     private void poolAllPossiblePots(){
-        for(int i = 0; i < potsInPlay.size()-1; i++) {
-            if (canBePooled(potsInPlay.get(i), potsInPlay.get(i++))) {
-
+        for(int i = potsInPlay.size(); i > 0; i--) {
+            Pot currentPot = potsInPlay.get(1);
+            Pot previousPot = potsInPlay.get(i-1);
+//            if (canBePooled(currentPot, previousPot))
+            if(currentPot.equals(previousPot)){
+                previousPot.increasPotBy(currentPot.getAmountOfWinningsInPot());
+                potsInPlay.remove(currentPot);
             }
         }
     }
 
-    private boolean canBePooled(Pot potOne, Pot potTwo){
-        //can this be correct?
-        if(potOne.getPlayersEligibleForWinnings() == potTwo.getPlayersEligibleForWinnings()){
-            return true;
-        }
-        return false;
-    }
+//    private boolean canBePooled(Pot potOne, Pot potTwo){
+//        if(potOne.getPlayersEligibleForWinnings().equals(potTwo.getPlayersEligibleForWinnings())){
+//            return true;
+//        }
+//        return false;
+//    }
 
 /*THIS INSTEAD HAPPENS IN SINGLE ROUND
 *

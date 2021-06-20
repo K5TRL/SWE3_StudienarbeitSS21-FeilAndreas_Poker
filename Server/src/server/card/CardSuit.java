@@ -1,4 +1,4 @@
-package server.Card;
+package server.card;
 
 public enum CardSuit {
     HEARTS,

@@ -1,10 +1,4 @@
-package server.GameType;
-
-import server.AllCards;
-import server.Card.Card;
-import server.RoundLogic;
-
-import java.util.ArrayList;
+package server.game_type;
 
 public class Omaha extends TexasHoldEm{
 

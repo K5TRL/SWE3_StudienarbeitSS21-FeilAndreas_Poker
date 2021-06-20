@@ -1,4 +1,4 @@
-package server;
+package server.settings;
 
 public class Blinds {
     private static Blinds instance;
@@ -9,7 +9,7 @@ public class Blinds {
         smallBlind = 100;
         bigBlind = smallBlind*2;
     }
-    public Blinds getInstance(){
+    public static Blinds getInstance(){
         if(instance==null){
             instance = new Blinds();
         }

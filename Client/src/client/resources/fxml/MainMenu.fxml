@@ -5,15 +5,14 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import java.net.URL?>
+
 <VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="client.MainMenuController">
+      xmlns:fx="http://javafx.com/fxml">
     <Label fx:id="lblTitle" text="Poker App"/>
     <VBox>
-        <Button text="Texas Hold 'Em" onAction="#startTexasHoldEmGame"/>
-        <Button text="Beenden" onAction="#closeApp"/>
+        <Button fx:id="btnStartTexasHoldEm" text="Texas Hold 'Em"/>
+        <Button fx:id="btnQuitGame" text="Beenden"/>
     </VBox>
     <stylesheets>
         <URL value="@../css/MainMenu.css"/>

@@ -28,26 +28,25 @@ public class ClientMain extends Application {
     public static void main(String[] args) throws InterruptedException, NotBoundException, RemoteException {
         System.out.println("Client boot successful.");
         launch(args);
-        startClient();
+        //startClient();
     }
 
     @Override
     public void start(Stage stage) throws Exception {
         ClientMain.primaryStage = stage;
 
-        primaryStage.setResizable(false);
-        primaryStage.setWidth(1920);
-        primaryStage.setHeight(1080);
-        primaryStage.setFullScreen(true);
-        primaryStage.setTitle("Poker");
+        stage.setResizable(false);
+        stage.setWidth(1920);
+        stage.setHeight(1080);
+        stage.setFullScreen(true);
+        stage.setTitle("Poker");
         Scene scene = new Scene(new HBox());
-
-        primaryStage.setScene(scene);
-        ClientMain.startApp();
-        primaryStage.show();
+        //SceneController sceneController = new SceneController(scene);
+        stage.setScene(scene);
+        stage.show();
     }
 
-    private static void startApp() {
-        SceneController sceneController = new SceneController()
-    }
+//    private static void startApp() {
+//        SceneController.getInstance().loadMainMenu();
+//    }
 }

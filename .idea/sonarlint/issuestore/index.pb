@@ -21,14 +21,6 @@ O
 Server/src/server/Testface.java,2\d\2d3c00c8b6584d6a1a8b1184e7b2659596ac9e4f
 T
 $Server/src/server/Card/CardSuit.java,5\4\54f7255da21dfaec5e04cc19428a77b79a3ff737
-R
-"Client/src/client/IViewLoader.java,e\3\e35d22dfcff4fa6d9f9ee6c80d505918c28118ec
-\
-,Client/src/client/resources/css/MainMenu.css,7\2\72a3b81d96d459670045d97459f43da236712f26
-^
-.Client/src/client/resources/fxml/MainMenu.fxml,8\e\8e22bd6a9f1e9fa60a8126ab44d172d554194af9
-Y
-)Client/src/client/MainMenuController.java,4\b\4b9ab8f6f45013c6bfc9804893e923c5d443a39c
 i
 9RemoteInterfaces/src/remoteInterfaces/IPlayerActions.java,3\7\378fb6ef862c82e3a32cf70a1e371ad451df06c9
 Y

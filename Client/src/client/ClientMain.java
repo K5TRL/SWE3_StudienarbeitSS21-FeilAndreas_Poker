@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import remoteInterfaces.IPlayer;
 import remoteInterfaces.IPlayerActions;
 import remoteInterfaces.ITestface;
 
@@ -22,9 +23,7 @@ public class ClientMain extends Application {
         ITestface testface = (ITestface) registry.lookup(ITestface.class.getName());
         registry = LocateRegistry.getRegistry(8089);
         IPlayerActions playerActions = (IPlayerActions) registry.lookup(IPlayerActions.class.getName());
-        playerActions.call();
-        System.out.println(testface.sayHello());
-
+         playerActions.call();
     }
     public static void main(String[] args) throws InterruptedException, NotBoundException, RemoteException {
         System.out.println("Client boot successful.");

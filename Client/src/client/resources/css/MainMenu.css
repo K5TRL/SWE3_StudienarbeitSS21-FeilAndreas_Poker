@@ -15,7 +15,7 @@ Label{
     -fx-max-width: 600;
     -fx-text-fill: white;
 }
-#vbMainMenu{
+#vbMainMenuRoot{
     -fx-background-image: url("../images/MainMenuBackground.png");
     -fx-background-size: 100%;
 }

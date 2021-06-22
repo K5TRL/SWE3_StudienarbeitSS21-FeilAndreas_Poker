@@ -9,13 +9,16 @@ import javafx.scene.paint.Color;
 public class SceneController implements IViewLoader{
     private final Scene scene;
     private final ViewController mainMenuController;
+    private final ViewController playerViewController;
 
     public SceneController(Scene scene){
         this.scene = scene;
         //scene = ClientMain.getPrimaryStage().getScene();
-        scene.setFill(Color.DARKRED);
+        scene.setFill(Color.HOTPINK);
         mainMenuController = new MainMenuController(this, "../fxml/MainMenu.fxml");
+        playerViewController = new PlayerViewController(this, "../fxml/PlayerView.fxml");
         loadMainMenu();
+        //loadPlayerView();
     }
 
     public void loadControllerAndUpdateScene(ViewController controller){
@@ -39,7 +42,8 @@ public class SceneController implements IViewLoader{
     }
 
     @Override
-    public void loadMainMenu() {
-        loadControllerAndUpdateScene(mainMenuController);
-    }
+    public void loadMainMenu() {loadControllerAndUpdateScene(mainMenuController);}
+
+    @Override
+    public void loadPlayerView() {loadControllerAndUpdateScene(playerViewController);}
 }

@@ -13,6 +13,9 @@ public class MainMenuController extends ViewController{
     private Button btnQuitGame;
     @FXML
     private Button btnStartTexasHoldEm;
+    @FXML
+    private Button btnStartOmaha;
+
 
     protected MainMenuController(SceneController viewLoader, String fxmlPath) {
         super(viewLoader, fxmlPath);
@@ -20,7 +23,22 @@ public class MainMenuController extends ViewController{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setButtons();
+    }
+
+    private void setButtons() {
+        setTextHoldEmButton();
+        setOmahaButton();
         setExitButton();
+    }
+
+
+
+    private void setTextHoldEmButton() {
+        btnStartTexasHoldEm.setOnAction(actionEvent -> getViewLoader().loadPlayerView());
+    }
+    private void setOmahaButton() {
+        btnStartOmaha.setDisable(true);
     }
 
     private void setExitButton(){

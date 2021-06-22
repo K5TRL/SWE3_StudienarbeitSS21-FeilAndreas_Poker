@@ -1,11 +1,12 @@
 package server.player;
 
+import remoteInterfaces.IPlayer;
 import server.GameLogic;
 import server.card.Card;
 
 import java.util.ArrayList;
 
-public class Player {
+public class Player implements IPlayer {
     private String name;
     private int funds;
     private ArrayList<Card> pocketCards;
@@ -14,11 +15,14 @@ public class Player {
     public Player(String name, int initialFunds){
         this.name = name;
         funds = initialFunds;
+        folded = false;
     }
 
+    @Override
     public String getName(){
         return name;
     }
+    @Override
     public int getFunds(){
         return funds;
     }
@@ -40,7 +44,7 @@ public class Player {
         funds -= betAmount;
     }
 
-    public void throwAwayHand(){
+    private void throwAwayHand(){
         pocketCards.clear();
     }
 
@@ -54,6 +58,15 @@ public class Player {
             pointValue += card.getValue();
         }
         return pointValue;
+    }
+
+    public void fold(){
+        folded = true;
+    }
+
+    public void resetThisPlayerForNewRound(){
+        throwAwayHand();
+        folded = false;
     }
 
     public boolean hasFolded(){

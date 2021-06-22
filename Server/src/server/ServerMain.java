@@ -1,7 +1,9 @@
 package server;
 
+import remoteInterfaces.IPlayer;
 import remoteInterfaces.IPlayerActions;
 import remoteInterfaces.ITestface;
+import server.player.Player;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -15,6 +17,8 @@ public class ServerMain {
         registry.rebind(ITestface.class.getName(), UnicastRemoteObject.exportObject(new Testface(),8088));
         registry = LocateRegistry.createRegistry(8089);
         registry.rebind(IPlayerActions.class.getName(), UnicastRemoteObject.exportObject(new PlayerActions(), 8089));
+        registry = LocateRegistry.createRegistry(8090);
+        registry.rebind(IPlayer.class.getName(), UnicastRemoteObject.exportObject(new Player("Andreas",GameLogic.getBuyIn()), 8090));
     }
     public static void main(String[] args) throws InterruptedException, RemoteException {
         System.out.println("Server boot successful.");

@@ -28,6 +28,7 @@ public class ShowdownLogic {
     * if he is eligible, he gets all the winnings in the pot.
     */
     public void payoutAllPots(){
+        //stream.findFirst()?
         for(Pot pot : PokerTable.getInstance().getAllPotsInPlay()){
             for(Player player : hierarchyOfPlayers){
                 if(pot.getPlayersEligibleForWinnings().contains(player)){

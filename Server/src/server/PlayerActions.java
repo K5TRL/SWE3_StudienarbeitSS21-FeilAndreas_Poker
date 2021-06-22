@@ -1,7 +1,11 @@
 package server;
 
 import remoteInterfaces.IPlayerActions;
+import server.player.PlayerManagement;
+import server.round.RoundLogic;
 
+import java.awt.*;
+import java.math.RoundingMode;
 import java.rmi.RemoteException;
 
 public class PlayerActions implements IPlayerActions {
@@ -27,7 +31,22 @@ public class PlayerActions implements IPlayerActions {
 
     @Override
     public void call() throws RemoteException {
-        System.out.println("Call.");
+        RoundLogic.getInstance().getCurrentBettingRound().getCurrentPlayerBetting().bet(RoundLogic.getInstance().getCurrentBettingRound().getLatestBetPlaced());
+        continueToNextPlayer();
+    }
+
+    @Override
+    public void fold() throws RemoteException {
+        RoundLogic.getInstance().getCurrentBettingRound().getCurrentPlayerBetting().fold();
+        continueToNextPlayer();
+    }
+
+    @Override
+    public void raise(int amount) throws RemoteException {
+        if( /*maybe validate over at client*/RoundLogic.getInstance().getCurrentBettingRound().getCurrentPlayerBetting().getFunds()>amount){
+            RoundLogic.getInstance().getCurrentBettingRound().setBetFromCurrentPlayerBetting(amount);
+        }
+        continueToNextPlayer();
     }
 
     /*
@@ -35,4 +54,7 @@ public class PlayerActions implements IPlayerActions {
     *
     *
     */
+    private void continueToNextPlayer(){
+        RoundLogic.getInstance().getCurrentBettingRound().switchToNextBettingPlayer();
+    }
 }

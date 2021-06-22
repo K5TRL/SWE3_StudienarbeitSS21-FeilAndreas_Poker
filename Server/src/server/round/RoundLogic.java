@@ -50,7 +50,7 @@ public class RoundLogic {
 //    public Player getBigBlindPlayer(){
 //        return bigBlind;
 //    }
-    private SingleBettingRound getCurrentBettingRound(){
+    public SingleBettingRound getCurrentBettingRound(){
         return currentRound;
     }
     public void moveToNextPlayer(){

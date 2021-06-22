@@ -50,7 +50,7 @@ public class GameLogic {
 
     private void resetPlayersforNewRound(){
         PlayerManagement.getInstance().getAllPlayers().forEach(player -> {
-            player.throwAwayHand();
+            player.resetThisPlayerForNewRound();
         });
         //Has to be this way, since everyone gets one card at a time!
         for(int i = 0; i<currentGameBeingPlayed.getAmountOfCardsAllowedOnHand(); i++){
@@ -64,6 +64,10 @@ public class GameLogic {
         PlayerManagement.getInstance().getAllPlayers().forEach(player -> {
             player.setFunds(BUY_IN);
         });
+    }
+
+    public static int getBuyIn() {
+        return BUY_IN;
     }
 
     public void executeCurrentRoundRules(){

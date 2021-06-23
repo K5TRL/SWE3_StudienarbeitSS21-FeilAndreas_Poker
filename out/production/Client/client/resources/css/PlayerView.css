@@ -1,0 +1,63 @@
+VBox{
+    -fx-alignment: center;
+    -fx-padding: 10px;
+    /*
+    -fx-min-width:1620;
+    -fx-pref-height: 1080;*/
+}
+HBox{/*
+    -fx-max-width: 300;
+    -fx-min-height: 1080;
+    */
+}
+
+Button{
+    -fx-font-size: 20;
+    -fx-pref-width: 200;
+    -fx-pref-height: 100;
+}
+
+TextField{
+/*    -fx-pref-height: ;
+*/  -fx-font-size: 16;
+    -fx-alignment: center;
+}
+BorderPane{
+    -fx-pref-width: 1080;
+}
+#bpLeftSide{
+    -fx-background-color: darkgreen;
+    -fx-pref-width: 1620px;
+}
+#bpRightSide{
+    -fx-background-color: saddlebrown;
+    -fx-max-width: 300px;
+    -fx-border-width: 0px 0px 0px 1px;
+    -fx-border-color: black;
+}
+#vbPlayerActions{
+    -fx-spacing: 40px;
+    -fx-padding: 50px;
+    -fx-alignment: center;
+}
+#hbPlayersPresent{
+    -fx-pref-height: 100;
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-width: 0px 0px 1px 0px;
+}
+#lblPlayerName{
+    -fx-font-size: 26;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+#lblPlayerFunds{
+    -fx-font-size: 18;
+    -fx-text-fill: lightgray;
+}
+
+#lblPlayerBet{
+    -fx-font-size: 32;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<BorderPane fx:id="hbPlayerViewRoot" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <left>
+        <BorderPane fx:id="bpLeftSide">
+            <top>
+                <HBox fx:id="hbPlayersPresent"/>
+            </top>
+        </BorderPane>
+    </left>
+
+    <right>
+        <BorderPane fx:id="bpRightSide">
+            <top>
+                <VBox>
+                    <Label fx:id="lblPlayerName"/>
+                    <Label fx:id="lblPlayerFunds"/>
+                </VBox>
+            </top>
+            <center>
+                <VBox fx:id="vbPlayerActions">
+                    <Button fx:id="btnFold"/>
+                    <Button fx:id="btnCall"/>
+                    <Button fx:id="btnRaise"/>
+                    <Slider fx:id="sldrRaiseAmount"/>
+                    <Label fx:id="lblPlayerBet"/>
+                </VBox>
+            </center>
+            <bottom>
+                <VBox>
+                    <Button fx:id="btnToMainMenu"/>
+                </VBox>
+            </bottom>
+        </BorderPane>
+    </right>
+    <stylesheets>
+        <URL value="@../css/PlayerView.css"/>
+    </stylesheets>
+</BorderPane>

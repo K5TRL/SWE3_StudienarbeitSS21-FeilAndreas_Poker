@@ -1,0 +1,24 @@
+VBox{
+    -fx-background-color: darkgreen;
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+}
+
+Button{
+    -fx-pref-width: 300px;
+    -fx-pref-height: 100px;
+}
+
+Label{
+    -fx-alignment: center;
+    -fx-font-size: 50;
+    -fx-max-width: 600;
+    -fx-text-fill: white;
+}
+#vbMainMenuRoot{
+    -fx-background-image: url("../images/MainMenuBackground.png");
+    -fx-background-size: 100%;
+}
+#vbButtons{
+    -fx-background-color: rgba(50, 50, 50, 0.5);
+}

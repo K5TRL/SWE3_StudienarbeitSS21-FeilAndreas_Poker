@@ -43,7 +43,7 @@ public class PlayerActions implements IPlayerActions {
 
     @Override
     public void raise(int amount) throws RemoteException {
-        if( /*maybe validate over at client*/RoundLogic.getInstance().getCurrentBettingRound().getCurrentPlayerBetting().getFunds()>amount){
+        if( /*maybe validate over at client*/RoundLogic.getInstance().getCurrentBettingRound().getCurrentPlayerBetting().getFunds().getValue()>amount){
             RoundLogic.getInstance().getCurrentBettingRound().setBetFromCurrentPlayerBetting(amount);
         }
         continueToNextPlayer();

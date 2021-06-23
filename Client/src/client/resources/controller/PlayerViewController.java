@@ -1,5 +1,6 @@
 package client.resources.controller;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -36,17 +37,48 @@ public class PlayerViewController extends ViewController{
     protected PlayerViewController(SceneController viewLoader, String fxmlPath) {
         super(viewLoader, fxmlPath);
     }
-    private IPlayer player;
+    private IPlayer player = new IPlayer() {
+        private int funds = 1000;
+        private SimpleIntegerProperty fundsProperty;
+        private String name = "Andreas";
+
+        @Override
+        public SimpleIntegerProperty getFunds() {
+            fundsProperty = new SimpleIntegerProperty(funds);
+            fundsProperty.addListener(new ChangeListener<Number>(){
+                @Override
+                public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1){
+                    setLabels();
+                    setSlider();
+                    setButtons();
+                }
+            });
+            return fundsProperty;
+        }
+
+        @Override
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public void decreaseFundsBy(int amount) {
+            //fundsProperty.set(funds-amount);
+            System.out.println("Amount:\t"+amount);
+            fundsProperty.set(funds-=amount);
+            System.out.println("Left:\t"+fundsProperty.getValue().intValue());
+        }
+    };
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            removeThisMethod();
-        } catch (NotBoundException e) {
-            e.printStackTrace();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            removeThisMethod();
+//        } catch (NotBoundException e) {
+//            e.printStackTrace();
+//        } catch (RemoteException e) {
+//            e.printStackTrace();
+//        }
         setPlayerBetTextField();
         setSlider();
         setLabels();
@@ -60,13 +92,13 @@ public class PlayerViewController extends ViewController{
 
     private void setLabels() {
         lblPlayerName.setText(player.getName());
-        lblPlayerFunds.setText(""+player.getFunds());
+        lblPlayerFunds.setText(""+player.getFunds().getValue().intValue());
     }
 
     private void setSlider() {
         setSliderListener();
         sldrRaiseAmount.setMin(/*getMinAmountFromServer*/100);
-        sldrRaiseAmount.setMax(/*CurrentPlayer.getFunds*/1000);
+        sldrRaiseAmount.setMax(player.getFunds().getValue().intValue());
     }
 
     private void setSliderListener() {
@@ -108,13 +140,18 @@ public class PlayerViewController extends ViewController{
         btnFold.setText("Fold");
     }
     private void setRaiseButton() {
-        if(Integer.parseInt(lblPlayerBet.getText())==/*player.maxFunds?*/1000){
+        if(Integer.parseInt(lblPlayerBet.getText())==player.getFunds().getValue().intValue()){
             btnRaise.setText("All In");
         }
         else if(/*somebody has set a bet before this player in this round*/false){
             btnRaise.setText("Raise");
         }
         else btnRaise.setText("Bet");
+        //PROBLEM: INT NEEDS TO BE INTEGER PROPERTY THAT CAN BE LISTENED TO
+        btnRaise.setOnAction(actionEvent -> {
+            int a = player.getFunds().getValue();
+            player.decreaseFundsBy(Integer.parseInt(lblPlayerBet.getText()));
+        });
     }
 
 }

@@ -1,5 +1,6 @@
 package server.player;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import remoteInterfaces.IPlayer;
 import server.GameLogic;
 import server.card.Card;
@@ -22,9 +23,15 @@ public class Player implements IPlayer {
     public String getName(){
         return name;
     }
+
     @Override
-    public int getFunds(){
-        return funds;
+    public void decreaseFundsBy(int amount) {
+        bet(amount);
+    }
+
+    @Override
+    public SimpleIntegerProperty getFunds(){
+        return new SimpleIntegerProperty(funds);
     }
 
     public void addCardToHand(Card card){

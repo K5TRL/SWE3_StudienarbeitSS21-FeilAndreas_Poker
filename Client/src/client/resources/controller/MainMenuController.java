@@ -1,5 +1,6 @@
 package client.resources.controller;
 
+import client.ClientStub;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,11 +11,13 @@ import java.util.ResourceBundle;
 public class MainMenuController extends ViewController{
 
     @FXML
-    private Button btnQuitGame;
-    @FXML
     private Button btnStartTexasHoldEm;
     @FXML
     private Button btnStartOmaha;
+    @FXML
+    private Button btnPlayerSettings;
+    @FXML
+    private Button btnQuitGame;
 
 
     protected MainMenuController(SceneController viewLoader, String fxmlPath) {
@@ -29,13 +32,20 @@ public class MainMenuController extends ViewController{
     private void setButtons() {
         setTextHoldEmButton();
         setOmahaButton();
+        setPlayerSettingsButtons();
         setExitButton();
     }
 
+    private void setPlayerSettingsButtons() {
+        btnPlayerSettings.setOnAction(actionEvent -> getViewLoader().loadPlayerSettings());
+    }
 
 
     private void setTextHoldEmButton() {
-        btnStartTexasHoldEm.setOnAction(actionEvent -> getViewLoader().loadPlayerView());
+        btnStartTexasHoldEm.setOnAction(actionEvent -> {
+            ClientStub.getInstance().startNewTexasHoldEmGame();
+            getViewLoader().loadPlayerView();
+        });
     }
     private void setOmahaButton() {
         btnStartOmaha.setDisable(true);

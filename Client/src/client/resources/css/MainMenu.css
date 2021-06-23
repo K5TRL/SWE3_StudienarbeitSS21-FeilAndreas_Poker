@@ -1,3 +1,7 @@
+.root{
+    -fx-background-image: url("../images/MainMenuBackground.png");
+}
+
 VBox{
     -fx-background-color: darkgreen;
     -fx-alignment: center;
@@ -7,6 +11,7 @@ VBox{
 Button{
     -fx-pref-width: 300px;
     -fx-pref-height: 100px;
+    -fx-font-size: 26;
 }
 
 Label{
@@ -15,10 +20,22 @@ Label{
     -fx-max-width: 600;
     -fx-text-fill: white;
 }
+TextField{
+    -fx-max-width: 500;
+    -fx-alignment: center;
+    -fx-font-size: 50;
+}
+HBox{
+    -fx-spacing: 50;
+    -fx-pref-width: 1920;
+    -fx-alignment: center;
+}
 #vbMainMenuRoot{
-    -fx-background-image: url("../images/MainMenuBackground.png");
     -fx-background-size: 100%;
 }
 #vbButtons{
     -fx-background-color: rgba(50, 50, 50, 0.5);
+}
+#lblTitle{
+    -fx-font-size: 62;
 }

@@ -1,0 +1,95 @@
+package client;
+
+import remoteInterfaces.IGameActions;
+import remoteInterfaces.IPlayer;
+import remoteInterfaces.IPlayerManagement;
+import remoteInterfaces.IServerSkeleton;
+
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+public class ClientStub {
+    //here, all the things the client needs from the server can be gotten
+
+    private Registry registry;
+
+    private IPlayerManagement playerManagement;
+    private IServerSkeleton skeleton;
+    private IPlayer thePlayer;
+
+    private static ClientStub instance;
+    private ClientStub(){
+        System.getProperty("java.security.policy","client.policy");
+        setRegistry();
+        setSkeleton();
+    }
+
+    private void setSkeleton() {
+        try{
+            this.skeleton = (IServerSkeleton) registry.lookup(IServerSkeleton.class.getName());
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void setRegistry() {
+        try{
+            registry = LocateRegistry.getRegistry(Registry.REGISTRY_PORT);
+        }
+        catch (RemoteException e){
+            System.err.println("Registry not found. Check if port set correctly.");
+            e.printStackTrace();
+        }
+    }
+
+    public static ClientStub getInstance(){
+        if(instance==null){
+            instance = new ClientStub();
+        }
+        return instance;
+    }
+
+    public void startNewTexasHoldEmGame(){
+        try{
+            if(registry == null){
+                setRegistry();
+            }
+//            IGameActions gameActions = (IGameActions) registry.lookup(IGameActions.class.getName());
+            if(skeleton == null){
+                setSkeleton();
+            }
+            skeleton.getGameLogic().startNewGame();
+//            gameActions.startNewGame();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void setBuyIn(int amount) throws RemoteException {
+        skeleton.getGameLogic().changeBuyIn(amount);
+    }
+
+    public int getBuyIn() throws RemoteException{
+        return skeleton.getGameLogic().getBuyIn();
+    }
+
+    public IPlayerManagement getPlayerManagement(){
+        return playerManagement;
+    }
+
+    public IPlayer getThePlayer() throws RemoteException {
+        if(playerManagement == null){
+            this.playerManagement = skeleton.getPlayerManagement();
+            System.out.println("We got Player Management");
+        }
+        if(thePlayer == null){
+            System.out.println("We tried getting the Player.");
+            this.thePlayer = playerManagement.getPlayer("The Player");
+        }
+        return this.thePlayer;
+    }
+}

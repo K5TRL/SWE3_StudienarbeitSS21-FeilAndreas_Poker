@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <Label fx:id="lblTitle" text="Player Settings"/>
+    <VBox fx:id="vbButtons">
+        <Label text="Buy In:"/>
+        <TextField fx:id="tfBuyIn"/>
+        <HBox>
+            <Button fx:id="btnAccept" text="Annehmen"/>
+            <Button fx:id="btnAbort" text="Abbrechen"/>
+        </HBox>
+    </VBox>
+    <stylesheets>
+        <URL value="@../css/MainMenu.css"/>
+    </stylesheets>
+</VBox>

@@ -1,0 +1,5 @@
+grant{
+permission java.net.SocketPermission "DESKTOP-C8UM6OE", "resolve";
+permission java.net.SocketPermission "192.168.56.1:1099", "connect,accept,resolve";
+permission java.security.AllPermission;
+};

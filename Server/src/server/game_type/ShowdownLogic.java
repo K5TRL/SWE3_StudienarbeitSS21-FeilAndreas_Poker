@@ -6,6 +6,7 @@ import server.GameLogic;
 import server.table.PokerTable;
 import server.table.Pot;
 
+import java.rmi.RemoteException;
 import java.util.LinkedList;
 
 //FOR VALIDATION OF HANDS, DETERMINING WHICH HAND IS THE HIGHEST POSSIBLE FOR EACH PLAYER STILL IN PLAY + DETERMINING WHICH PLAYER WINS WHICH POT
@@ -27,7 +28,7 @@ public class ShowdownLogic {
     * then checks if the person with the current highest hierarchy is eligible to win the pot
     * if he is eligible, he gets all the winnings in the pot.
     */
-    public void payoutAllPots(){
+    public void payoutAllPots() throws RemoteException {
         //stream.findFirst()?
         for(Pot pot : PokerTable.getInstance().getAllPotsInPlay()){
             for(Player player : hierarchyOfPlayers){
@@ -39,7 +40,7 @@ public class ShowdownLogic {
         GameLogic.getInstance().prepareNewRound();
     }
 
-    public void createHierarchy(){
+    public void createHierarchy() throws RemoteException {
         //TODO: REPLACE FOR ACTUAL HIERARCHY BUILDING
         for(Player player : PlayerManagement.getInstance().getAllPlayers()){
             hierarchyOfPlayers.add(player);

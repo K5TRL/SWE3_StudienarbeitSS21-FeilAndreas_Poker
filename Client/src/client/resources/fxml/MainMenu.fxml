@@ -12,6 +12,7 @@
     <VBox fx:id="vbButtons">
         <Button fx:id="btnStartTexasHoldEm" text="Texas Hold 'Em"/>
         <Button fx:id="btnStartOmaha" text="Omaha"/>
+        <Button fx:id="btnPlayerSettings" text="Einstellungen"/>
         <Button fx:id="btnQuitGame" text="Beenden"/>
     </VBox>
     <stylesheets>

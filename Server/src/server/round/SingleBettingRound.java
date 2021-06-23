@@ -7,6 +7,7 @@ import server.settings.Blinds;
 import server.table.PokerTable;
 import server.table.Pot;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 //ONE SINGLE BETTING ROUND
@@ -18,7 +19,7 @@ public class SingleBettingRound {
     private Pot currentPot;
     private ArrayList<Player> allPlayers;
 
-    public SingleBettingRound(){
+    public SingleBettingRound() throws RemoteException {
         potsCreatedInThisRound.add(new Pot(PlayerManagement.getInstance().getAllPlayers()));
         currentPot = potsCreatedInThisRound.get(0);
         ArrayList<Player> allPlayers = PlayerManagement.getInstance().getAllPlayers();
@@ -28,7 +29,7 @@ public class SingleBettingRound {
 
     //TODO: create side-pot if one player doesn't have the funds to bet along but still went all in.
 
-    public void addPotsToTable(){
+    public void addPotsToTable() throws RemoteException {
         for(Pot pot : potsCreatedInThisRound){
             PokerTable.getInstance().addPotToTable(pot);
         }
@@ -44,7 +45,7 @@ public class SingleBettingRound {
         return false;
     }
 
-    public void switchToNextBettingPlayer(){
+    public void switchToNextBettingPlayer() throws RemoteException {
         if(roundIsCompleted()){
             addPotsToTable();
             GameLogic.getInstance().prepareNewRound();

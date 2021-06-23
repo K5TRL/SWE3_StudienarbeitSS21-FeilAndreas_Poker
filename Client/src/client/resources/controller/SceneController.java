@@ -10,6 +10,7 @@ public class SceneController implements IViewLoader{
     private final Scene scene;
     private final ViewController mainMenuController;
     private final ViewController playerViewController;
+    private final ViewController playerSettingsController;
 
     public SceneController(Scene scene){
         this.scene = scene;
@@ -17,6 +18,7 @@ public class SceneController implements IViewLoader{
         scene.setFill(Color.HOTPINK);
         mainMenuController = new MainMenuController(this, "../fxml/MainMenu.fxml");
         playerViewController = new PlayerViewController(this, "../fxml/PlayerView.fxml");
+        playerSettingsController = new PlayerSettingsController(this, "../fxml/PlayerSettings.fxml");
         loadMainMenu();
         //loadPlayerView();
     }
@@ -46,4 +48,9 @@ public class SceneController implements IViewLoader{
 
     @Override
     public void loadPlayerView() {loadControllerAndUpdateScene(playerViewController);}
+
+    @Override
+    public void loadPlayerSettings() {
+        loadControllerAndUpdateScene(playerSettingsController);
+    }
 }

@@ -3,6 +3,7 @@ package server.table;
 import server.player.PlayerManagement;
 import server.card.Card;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class PokerTable {
@@ -11,11 +12,11 @@ public class PokerTable {
     private ArrayList<Pot> potsInPlay;
     private ArrayList<Card> cardsOnTable;
 
-    private PokerTable(){
+    private PokerTable() throws RemoteException {
         potsInPlay.add(new Pot(PlayerManagement.getInstance().getAllPlayers()));
     }
 
-    public static PokerTable getInstance(){
+    public static PokerTable getInstance() throws RemoteException {
         if(instance == null){
             instance = new PokerTable();
         }

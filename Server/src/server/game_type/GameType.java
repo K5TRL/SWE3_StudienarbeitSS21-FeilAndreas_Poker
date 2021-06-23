@@ -1,5 +1,7 @@
 package server.game_type;
 
+import java.rmi.RemoteException;
+
 public abstract class GameType {
     private final int amountOfCardsAllowedOnHand;
     private final String nameOfTheGame;
@@ -20,7 +22,7 @@ public abstract class GameType {
     public int getAmountOfBettingRoundsAllowedPerGame(){
         return amountOfBettingRoundsAllowedPerGame;
     }
-    public void executeCurrentRoundRules(){}
+    public void executeCurrentRoundRules() throws RemoteException {}
     //public void moveToNextRound(){}
 
 }

@@ -1,5 +1,6 @@
 package client.resources.controller;
 
+import client.ClientStub;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -37,41 +38,53 @@ public class PlayerViewController extends ViewController{
     protected PlayerViewController(SceneController viewLoader, String fxmlPath) {
         super(viewLoader, fxmlPath);
     }
-    private IPlayer player = new IPlayer() {
-        private int funds = 1000;
-        private SimpleIntegerProperty fundsProperty;
-        private String name = "Andreas";
+    private IPlayer thePlayer;
+    private SimpleIntegerProperty remainingPlayerFunds;
 
-        @Override
-        public SimpleIntegerProperty getFunds() {
-            fundsProperty = new SimpleIntegerProperty(funds);
-            fundsProperty.addListener(new ChangeListener<Number>(){
-                @Override
-                public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1){
-                    setLabels();
-                    setSlider();
-                    setButtons();
-                }
-            });
-            return fundsProperty;
-        }
-
-        @Override
-        public String getName() {
-            return name;
-        }
-
-        @Override
-        public void decreaseFundsBy(int amount) {
-            //fundsProperty.set(funds-amount);
-            System.out.println("Amount:\t"+amount);
-            fundsProperty.set(funds-=amount);
-            System.out.println("Left:\t"+fundsProperty.getValue().intValue());
-        }
-    };
+//    private IPlayer player = new IPlayer() {
+//        private int funds = 1000;
+//        private SimpleIntegerProperty fundsProperty;
+//        private String name = "Andreas";
+//
+//        @Override
+//        public SimpleIntegerProperty getFunds() {
+//            fundsProperty = new SimpleIntegerProperty(funds);
+//            fundsProperty.addListener(new ChangeListener<Number>(){
+//                @Override
+//                public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1){
+//                    setLabels();
+//                    setSlider();
+//                    setButtons();
+//                }
+//            });
+//            return fundsProperty;
+//        }
+//
+//        @Override
+//        public String getName() {
+//            return name;
+//        }
+//
+//        @Override
+//        public void decreaseFundsBy(int amount) {
+//            //fundsProperty.set(funds-amount);
+//            System.out.println("Amount:\t"+amount);
+//            fundsProperty.set(funds-=amount);
+//            System.out.println("Left:\t"+fundsProperty.getValue().intValue());
+//        }
+//    };
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            setThePlayer();
+            setPlayerBetTextField();
+            setSlider();
+            setLabels();
+            setButtons();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
 //        try {
 //            removeThisMethod();
 //        } catch (NotBoundException e) {
@@ -79,34 +92,59 @@ public class PlayerViewController extends ViewController{
 //        } catch (RemoteException e) {
 //            e.printStackTrace();
 //        }
-        setPlayerBetTextField();
-        setSlider();
-        setLabels();
-        setButtons();
+    }
+
+    private void setThePlayer() throws RemoteException {
+        if(ClientStub.getInstance().getThePlayer() != null){
+            thePlayer= ClientStub.getInstance().getThePlayer();
+            remainingPlayerFunds = new SimpleIntegerProperty(thePlayer.getFunds());
+            setFundsListener();
+        }
+    }
+
+    private void setFundsListener() {
+        remainingPlayerFunds.addListener(new ChangeListener<Number>(){
+                @Override
+                public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1){
+                    try{
+                        setLabels();
+                        setSlider();
+                        setButtons();
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            });
     }
 
     private void removeThisMethod() throws NotBoundException, RemoteException {
         Registry registry = LocateRegistry.getRegistry(8090);
-        this.player = (IPlayer) registry.lookup(IPlayer.class.getName());
+        this.thePlayer = (IPlayer) registry.lookup(IPlayer.class.getName());
     }
 
-    private void setLabels() {
-        lblPlayerName.setText(player.getName());
-        lblPlayerFunds.setText(""+player.getFunds().getValue().intValue());
+    private void setLabels() throws RemoteException {
+        lblPlayerName.setText(thePlayer.getName());
+        lblPlayerFunds.setText(""+remainingPlayerFunds.getValue().intValue());
     }
 
-    private void setSlider() {
+    private void setSlider() throws RemoteException {
         setSliderListener();
         sldrRaiseAmount.setMin(/*getMinAmountFromServer*/100);
-        sldrRaiseAmount.setMax(player.getFunds().getValue().intValue());
+        sldrRaiseAmount.setMax(remainingPlayerFunds.getValue().intValue());
     }
 
     private void setSliderListener() {
         sldrRaiseAmount.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                setPlayerBetTextField();
-                setRaiseButton();
+
+                try {
+                    setPlayerBetTextField();
+                    setRaiseButton();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -115,11 +153,11 @@ public class PlayerViewController extends ViewController{
         btnRaise.setText("All In");
     }
 
-    private void setButtons() {
+    private void setButtons() throws RemoteException {
         setPlayerActionButtons();
         setToMainMenuButton();
     }
-    private void setPlayerActionButtons() {
+    private void setPlayerActionButtons() throws RemoteException {
         setCallButton();
         setFoldButton();
         setRaiseButton();
@@ -139,18 +177,33 @@ public class PlayerViewController extends ViewController{
     private void setFoldButton() {
         btnFold.setText("Fold");
     }
-    private void setRaiseButton() {
-        if(Integer.parseInt(lblPlayerBet.getText())==player.getFunds().getValue().intValue()){
-            btnRaise.setText("All In");
+
+    private void setRaiseButton() throws RemoteException {
+        btnRaise.setText("Bet");
+        validateRaiseButtonText();
+
+    }
+
+    private void validateRaiseButtonText() throws RemoteException {
+        if(Integer.parseInt(lblPlayerBet.getText())== remainingPlayerFunds.getValue().intValue()){
+        if(Integer.parseInt(lblPlayerBet.getText())==0){
+            btnRaise.setDisable(true);
         }
-        else if(/*somebody has set a bet before this player in this round*/false){
-            btnRaise.setText("Raise");
-        }
-        else btnRaise.setText("Bet");
-        //PROBLEM: INT NEEDS TO BE INTEGER PROPERTY THAT CAN BE LISTENED TO
+        else btnRaise.setText("All In");
+    }
+    else if(/*somebody has set a bet before this player in this round*/false){
+        btnRaise.setText("Raise");
+    }
+        //PROBLEM: we need to somehow send this over to the server too
         btnRaise.setOnAction(actionEvent -> {
-            int a = player.getFunds().getValue();
-            player.decreaseFundsBy(Integer.parseInt(lblPlayerBet.getText()));
+            try{
+                int a = remainingPlayerFunds.getValue().intValue();
+                remainingPlayerFunds.set(a - Integer.parseInt(lblPlayerBet.getText()));
+                //thePlayer.decreaseFundsBy(Integer.parseInt(lblPlayerBet.getText()));
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
         });
     }
 

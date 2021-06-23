@@ -3,6 +3,8 @@ package server.round;
 import server.GameLogic;
 import server.player.Player;
 
+import java.rmi.RemoteException;
+
 public class RoundLogic {
 //    private Player currentDealer;
 //    private Player smallBlind;
@@ -31,12 +33,12 @@ public class RoundLogic {
         currentBettingRoundNumber = 0;
     }
 
-    public void newRound(){
+    public void newRound() throws RemoteException {
         currentRound = new SingleBettingRound();
         currentBettingRoundNumber++;
     }
 
-    public void moveToNextRound(){
+    public void moveToNextRound() throws RemoteException {
         if(currentBettingRoundNumber < GameLogic.getInstance().getCurrentGameBeingPlayed().getAmountOfBettingRoundsAllowedPerGame()){
             currentBettingRoundNumber++;
             GameLogic.getInstance().prepareNewRound();
@@ -53,7 +55,7 @@ public class RoundLogic {
     public SingleBettingRound getCurrentBettingRound(){
         return currentRound;
     }
-    public void moveToNextPlayer(){
+    public void moveToNextPlayer() throws RemoteException {
         currentRound.switchToNextBettingPlayer();
     }
 

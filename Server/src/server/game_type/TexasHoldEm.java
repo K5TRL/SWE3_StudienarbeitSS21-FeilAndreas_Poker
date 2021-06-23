@@ -6,6 +6,7 @@ import server.settings.Blinds;
 import server.card.Card;
 import server.round.RoundLogic;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class TexasHoldEm extends GameType{
@@ -23,7 +24,7 @@ public class TexasHoldEm extends GameType{
     }
     //private static final int AMOUNT_OF_ROUNDS = 3;
 
-    public void executeCurrentRoundRules(){
+    public void executeCurrentRoundRules() throws RemoteException {
         switch (RoundLogic.getInstance().getCurrentBettingRoundNumber()){
             case 0:
                 payBlinds();
@@ -43,7 +44,7 @@ public class TexasHoldEm extends GameType{
         }
     }
 
-    public void payBlinds() {
+    public void payBlinds() throws RemoteException {
         PlayerManagement.getInstance().getSmallBlindPlayer().bet(Blinds.getInstance().getSmallBlindAmount());
         PlayerManagement.getInstance().getBigBlindPlayer().bet(Blinds.getInstance().getBigBlindAmount());
     }

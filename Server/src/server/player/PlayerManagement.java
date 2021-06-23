@@ -1,20 +1,26 @@
 package server.player;
 
+import remoteInterfaces.IPlayer;
+import remoteInterfaces.IPlayerManagement;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class PlayerManagement {
+public class PlayerManagement extends UnicastRemoteObject implements IPlayerManagement {
 
-    private ArrayList<Player> allPlayers;
+    private ArrayList<Player> allPlayers = new ArrayList<>();
     private static PlayerManagement instance;
     private Player dealer;
     private Player bigBlind;
     private Player smallBlind;
     private Player currentPlayerBetting;
 
-    private PlayerManagement(){
+    private PlayerManagement() throws RemoteException {
+        super();
         //setDealerAndBlindsForNewGame();
     }
-    public static PlayerManagement getInstance(){
+    public static PlayerManagement getInstance() throws RemoteException {
         if(instance==null){
             instance = new PlayerManagement();
         }
@@ -47,4 +53,13 @@ public class PlayerManagement {
         return bigBlind;
     }
 
+    @Override
+    public IPlayer getPlayer(String name) throws RemoteException {
+        return allPlayers.stream().filter(player -> player.getName().equals(name)).findFirst().orElse(null);
+    }
+
+//    @Override
+//    public IPlayerManagement getPlayerManagement() throws RemoteException {
+//        return null;
+//    }
 }

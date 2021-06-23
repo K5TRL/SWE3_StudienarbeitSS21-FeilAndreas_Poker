@@ -1,5 +1,7 @@
 package server;
 
+import remoteInterfaces.IGameActions;
+import remoteInterfaces.IGameLogic;
 import server.card.AllCards;
 import server.game_type.GameType;
 import server.game_type.TexasHoldEm;
@@ -7,16 +9,20 @@ import server.player.Player;
 import server.player.PlayerManagement;
 import server.round.RoundLogic;
 
-public class GameLogic {
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-    private static final int BUY_IN = 1000;
+public class GameLogic extends UnicastRemoteObject implements IGameLogic {
+
+    private int BUY_IN = 7000;
     private static GameLogic instance;
     private GameType currentGameBeingPlayed;
 
-    private GameLogic(){
+    private GameLogic() throws RemoteException {
+        super();
         setCurrentGameBeingPlayedToTexasHoldEm();
     }
-    public static GameLogic getInstance(){
+    public static GameLogic getInstance() throws RemoteException {
         if(instance==null){
             instance = new GameLogic();
         }
@@ -31,13 +37,13 @@ public class GameLogic {
         return currentGameBeingPlayed;
     }
 
-    public void prepareNewGame(){
+    public void prepareNewGame() throws RemoteException {
         preparePlayersForNewGame();
         RoundLogic.getInstance().resetBettingRoundForNewGame();
         PlayerManagement.getInstance().setDealerAndBlindsForNewGame();
     }
 
-    public void prepareNewRound(){
+    public void prepareNewRound() throws RemoteException {
         prepareAllCards();
         resetPlayersforNewRound();
         RoundLogic.getInstance().newRound();
@@ -48,7 +54,7 @@ public class GameLogic {
         AllCards.getInstance().shuffleDeck();
     }
 
-    private void resetPlayersforNewRound(){
+    private void resetPlayersforNewRound() throws RemoteException {
         PlayerManagement.getInstance().getAllPlayers().forEach(player -> {
             player.resetThisPlayerForNewRound();
         });
@@ -60,22 +66,39 @@ public class GameLogic {
         }
     }
 
-    private void preparePlayersForNewGame(){
+    private void preparePlayersForNewGame() throws RemoteException {
         PlayerManagement.getInstance().getAllPlayers().forEach(player -> {
             player.setFunds(BUY_IN);
         });
     }
 
-    public static int getBuyIn() {
+    public int getBuyIn() {
         return BUY_IN;
     }
 
-    public void executeCurrentRoundRules(){
+    public void executeCurrentRoundRules() throws RemoteException {
         currentGameBeingPlayed.executeCurrentRoundRules();
     }
 
 
+    @Override
+    public void startNewGame() throws RemoteException {
+        System.out.println("Client has sent request to start new game!");
+        if(!(PlayerManagement.getInstance().getAllPlayers().size() > 0)){
+            Player thePlayer = new Player("The Player");
+            PlayerManagement.getInstance().addPlayer(thePlayer);
+            System.out.println("Created:\t"+thePlayer.getName());
+            Player theNPC = new Player("The NPC");
+            PlayerManagement.getInstance().addPlayer(theNPC);
+            System.out.println("Created:\t"+theNPC.getName());
+        }
+        prepareNewGame();
+    }
 
+    @Override
+    public void changeBuyIn(int amount) throws RemoteException {
+        BUY_IN = amount;
+    }
 
 
 }

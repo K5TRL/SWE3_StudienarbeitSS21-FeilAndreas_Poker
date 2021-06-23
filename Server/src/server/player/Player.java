@@ -5,17 +5,20 @@ import remoteInterfaces.IPlayer;
 import server.GameLogic;
 import server.card.Card;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class Player implements IPlayer {
+public class Player extends UnicastRemoteObject implements IPlayer {
     private String name;
     private int funds;
     private ArrayList<Card> pocketCards;
     private boolean folded;
 
-    public Player(String name, int initialFunds){
+    public Player(String name/*, int initialFunds*/) throws RemoteException {
+        super();
         this.name = name;
-        funds = initialFunds;
+        //funds = initialFunds;
         folded = false;
     }
 
@@ -30,11 +33,11 @@ public class Player implements IPlayer {
     }
 
     @Override
-    public SimpleIntegerProperty getFunds(){
-        return new SimpleIntegerProperty(funds);
+    public int getFunds(){
+        return funds;
     }
 
-    public void addCardToHand(Card card){
+    public void addCardToHand(Card card) throws RemoteException {
         if(pocketCards.size()< GameLogic.getInstance().getCurrentGameBeingPlayed().getAmountOfCardsAllowedOnHand()){
             pocketCards.add(card);
         }

@@ -2,6 +2,7 @@ package server;
 
 import remoteInterfaces.IGameLogic;
 import server.card.AllCards;
+import server.card.Card;
 import server.game_type.GameType;
 import server.game_type.TexasHoldEm;
 import server.player.Player;
@@ -48,6 +49,7 @@ public class GameLogic extends UnicastRemoteObject implements IGameLogic {
         prepareAllCards();
         resetPlayersforNewRound();
         RoundLogic.getInstance().newRound();
+        currentGameBeingPlayed.executeCurrentRoundRules();
     }
 
     private void prepareAllCards(){
@@ -62,7 +64,9 @@ public class GameLogic extends UnicastRemoteObject implements IGameLogic {
         //Has to be this way, since everyone gets one card at a time!
         for(int i = 0; i<currentGameBeingPlayed.getAmountOfCardsAllowedOnHand(); i++){
             for(Player player : PlayerManagement.getInstance().getAllPlayers()){
-                player.addCardToHand(AllCards.getInstance().getRandomCard());
+                Card card= AllCards.getInstance().getRandomCard();
+                player.addCardToHand(card);
+                System.out.println("Card\t"+card.getSuit()+card.getValue()+" added to Player:\t"+player.getName());
             }
         }
     }

@@ -48,12 +48,12 @@ public class ShowdownLogic {
         sortForHierarchy();
     }
     //TODO: SORTING
-    private void sortForHierarchy(){
+    private void sortForHierarchy() throws RemoteException {
         for(int i = 1; i<hierarchyOfPlayers.size(); i++){
             Player p1 = hierarchyOfPlayers.get(i);
-            int key = hierarchyOfPlayers.get(i).getHandValue();
+            int key = hierarchyOfPlayers.get(i).getPocketCards().get(0).getValue()+hierarchyOfPlayers.get(i).getPocketCards().get(1).getValue();
             int j = i-1;
-            while((i>-1) && (hierarchyOfPlayers.get(j).getHandValue() > key)){
+            while((i>-1) && ((hierarchyOfPlayers.get(j).getPocketCards().get(0).getValue()+hierarchyOfPlayers.get(j).getPocketCards().get(1).getValue()) > key)){
                 hierarchyOfPlayers.set(j+1, hierarchyOfPlayers.get(j));
                 j--;
             }

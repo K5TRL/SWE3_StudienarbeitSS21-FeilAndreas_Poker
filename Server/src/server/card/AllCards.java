@@ -1,12 +1,11 @@
 package server.card;
 
-import java.util.ArrayList;
-import java.util.Stack;
+import java.util.*;
 
 public class AllCards {
     private static AllCards instance;
     //TODO: CHANGE TO STACK
-    private Stack<Card> allCards;
+    private List<Card> allCards;
 
     private AllCards(){
 
@@ -29,26 +28,15 @@ public class AllCards {
     }
 
     public void shuffleDeck(){
-        ArrayList<Card> tempArrayList = new ArrayList<>();
-        int amountOfCardsLeftToIterateOver = allCards.size();
-        for(int i = 0; i<allCards.size(); i++){
-            //int position = (int)(Math.random()* allCards.size());
-            Card tempCard = allCards.get((int)(Math.random()* amountOfCardsLeftToIterateOver));
-            amountOfCardsLeftToIterateOver--;
-            tempArrayList.add(tempCard);
-        }
-        allCards.clear();
-        for(Card card : tempArrayList){
-            allCards.push(card);
-        }
+        Collections.shuffle(allCards);
     }
 
     public Card getRandomCard(){
-        return allCards.pop();
+        return allCards.remove(0);
     }
 
     //IT IS TRADITION TO BURN A CARD BEFORE PLAYING THE FLOP, TURN AND RIVER
     public void burnCard(){
-        allCards.pop();
+        allCards.remove(0);
     }
 }

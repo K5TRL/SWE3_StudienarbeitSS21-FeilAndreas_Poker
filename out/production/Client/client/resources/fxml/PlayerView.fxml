@@ -5,6 +5,7 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import client.resources.view_components.*?>
 
 <?import java.net.URL?>
 <BorderPane fx:id="hbPlayerViewRoot" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
@@ -13,6 +14,16 @@
             <top>
                 <HBox fx:id="hbPlayersPresent"/>
             </top>
+            <center>
+                <BorderPane>
+                    <left></left>
+                    <top></top>
+                    <right></right>
+                    <bottom>
+                        <PlayerHandRow fx:id="playerHandRow"/>
+                    </bottom>
+                </BorderPane>
+            </center>
         </BorderPane>
     </left>
 
@@ -31,6 +42,7 @@
                     <Button fx:id="btnRaise"/>
                     <Slider fx:id="sldrRaiseAmount"/>
                     <Label fx:id="lblPlayerBet"/>
+                    <Button fx:id="btnDealCards"/>
                 </VBox>
             </center>
             <bottom>

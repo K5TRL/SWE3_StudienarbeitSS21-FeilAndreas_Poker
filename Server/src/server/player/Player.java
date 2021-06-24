@@ -1,6 +1,7 @@
 package server.player;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import remoteInterfaces.ICard;
 import remoteInterfaces.IPlayer;
 import server.GameLogic;
 import server.card.Card;
@@ -14,6 +15,18 @@ public class Player extends UnicastRemoteObject implements IPlayer {
     private int funds;
     private ArrayList<Card> pocketCards;
     private boolean folded;
+    //TODO: LISTENER ON LASTPLACEDBET THAT CHANGES THE "REACTED THIS ROUND" TO FALSE
+    private boolean reactedThisRound;
+
+    public void reactionRequired(){
+        if(!folded){
+            reactedThisRound = false;
+        }
+    }
+
+    public boolean isReactionRequired(){
+        return !reactedThisRound;
+    }
 
     public Player(String name/*, int initialFunds*/) throws RemoteException {
         super();
@@ -21,6 +34,13 @@ public class Player extends UnicastRemoteObject implements IPlayer {
         //funds = initialFunds;
         folded = false;
         pocketCards = new ArrayList<>();
+    }
+
+    @Override
+    public ArrayList<ICard> getPocketCards(){
+        ArrayList<ICard> generatedPocketCards = new ArrayList<>();
+        pocketCards.forEach(card -> generatedPocketCards.add(card));
+        return generatedPocketCards;
     }
 
     @Override
@@ -60,20 +80,23 @@ public class Player extends UnicastRemoteObject implements IPlayer {
         pocketCards.clear();
     }
 
-    public ArrayList<Card> getPocketCards(){
-        return pocketCards;
-    }
-    //TODO: DELETE, FOR DEMO-PURPOSES ONLY
-    public int getHandValue(){
-        int pointValue = 0;
-        for(Card card : pocketCards){
-            pointValue += card.getValue();
-        }
-        return pointValue;
-    }
+//    public ArrayList<Card> getPocketCards(){
+//        return pocketCards;
+//    }
+//    //TODO: DELETE, FOR DEMO-PURPOSES ONLY
+////    public int getHandValue(){
+////        int pointValue = 0;
+////        for(Card card : pocketCards){
+////            pointValue += card.getValue();
+////        }
+//        return pointValue;
+//    }
 
-    public void fold(){
+    @Override
+    public void fold() throws RemoteException{
         folded = true;
+        reactedThisRound = true;
+        System.out.println("Folded:\t"+folded);
     }
 
     public void resetThisPlayerForNewRound(){
@@ -81,7 +104,8 @@ public class Player extends UnicastRemoteObject implements IPlayer {
         folded = false;
     }
 
-    public boolean hasFolded(){
+    @Override
+    public boolean hasFolded() throws  RemoteException{
         return folded;
     }
 }

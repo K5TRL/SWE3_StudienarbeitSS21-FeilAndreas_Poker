@@ -1,6 +1,8 @@
 package client.resources.controller;
 
 import client.ClientStub;
+import client.resources.view_components.PlayerHandRow;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -23,6 +25,8 @@ public class PlayerViewController extends ViewController{
     @FXML
     private Button btnToMainMenu;
     @FXML
+    private Button btnDealCards;
+    @FXML
     private Label lblPlayerBet;
     @FXML
     private Slider sldrRaiseAmount;
@@ -30,29 +34,72 @@ public class PlayerViewController extends ViewController{
     private Label lblPlayerName;
     @FXML
     private Label lblPlayerFunds;
+    @FXML
+    private PlayerHandRow playerHandRow;
 
     protected PlayerViewController(SceneController viewLoader, String fxmlPath) {
         super(viewLoader, fxmlPath);
     }
+    //It doesn't actually matter what kind of single properties they are or what kind of change they're waiting for.
+    //They merely tell the code on client-side "hey, we changed something! take an other look at what's on server for you to get!"
     private SimpleIntegerProperty remainingPlayerFunds;
+    private SimpleBooleanProperty playerFolded;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             setThePlayer();
+            setListeners();
             setPlayerBetTextField();
             setSlider();
             setLabels();
             setButtons();
+            setHandCards();
+            disableAllButtons();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
     }
 
+    private void setHandCards() {
+        try {
+            playerHandRow.setPlayer(ClientStub.getInstance().getThePlayer());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void setListeners() {
+        setFundsListener();
+        setFoldListener();
+    }
+
+    private void setFoldListener() {
+        playerFolded.addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                try {
+                    disableAllButtons();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void disableAllButtons() throws RemoteException{
+        boolean hasFolded = ClientStub.getInstance().getThePlayer().hasFolded();
+        btnRaise.setDisable(hasFolded);
+        btnCall.setDisable(hasFolded);
+        btnFold.setDisable(hasFolded);
+    }
+
     private void setThePlayer() throws RemoteException {
         if(ClientStub.getInstance().getThePlayer() != null){
             remainingPlayerFunds = new SimpleIntegerProperty(ClientStub.getInstance().getThePlayer().getFunds());
-            setFundsListener();
+            playerFolded = new SimpleBooleanProperty(ClientStub.getInstance().getThePlayer().hasFolded());
         }
         else getViewLoader().loadMainMenu();
     }
@@ -105,8 +152,23 @@ public class PlayerViewController extends ViewController{
 
     private void setButtons() throws RemoteException {
         setPlayerActionButtons();
+        setDealCardsButton();
         setToMainMenuButton();
     }
+
+    private void setDealCardsButton() {
+        btnDealCards.setText("Deal Cards");
+        btnDealCards.setOnAction(actionEvent -> {
+            ClientStub.getInstance().dealCards();
+        });
+        try {
+            btnDealCards.setDisable(ClientStub.getInstance().getThePlayer().hasFolded());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     private void setPlayerActionButtons() throws RemoteException {
         setCallButton();
         setFoldButton();
@@ -126,6 +188,15 @@ public class PlayerViewController extends ViewController{
     }
     private void setFoldButton() {
         btnFold.setText("Fold");
+        btnFold.setOnAction(actionEvent -> {
+            try{
+                ClientStub.getInstance().fold();
+                playerFolded.set(!playerFolded.getValue().booleanValue());
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        });
     }
 
     private void setRaiseButton() throws RemoteException {

@@ -12,10 +12,10 @@
     <VBox fx:id="vbButtons">
         <Label text="Buy In:"/>
         <TextField fx:id="tfBuyIn"/>
-        <Label fx:id="lblInfo" text="Die Blinds werden automatisch berechnet."/>
+        <Label fx:id="lblInfo" text="The blinds are calculated automatically"/>
         <HBox>
-            <Button fx:id="btnAccept" text="Annehmen"/>
-            <Button fx:id="btnAbort" text="Abbrechen"/>
+            <Button fx:id="btnAccept" text="Accept"/>
+            <Button fx:id="btnAbort" text="Abort"/>
         </HBox>
     </VBox>
     <stylesheets>

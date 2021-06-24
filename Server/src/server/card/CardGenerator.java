@@ -18,9 +18,11 @@ public class CardGenerator {
     public Stack<Card> createFullDeck(){
         Stack<Card> allCards = new Stack<>();
         EnumSet.allOf(CardSuit.class).forEach(cardSuit -> {
-            for(int i = 0; i<13; i++){
+            for(int i = 1; i<=13; i++){
                 try {
-                    allCards.push(new Card(i, cardSuit));
+                    Card card = new Card(i, cardSuit);
+                    allCards.push(card);
+                    System.out.println("Card added\t"+card.getSuit()+card.getValue());
                 }
                 catch (Exception e){
                     e.printStackTrace();

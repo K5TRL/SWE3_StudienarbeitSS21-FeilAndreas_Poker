@@ -105,6 +105,10 @@ public class ClientStub {
         thePlayer.decreaseFundsBy(amount);
     }
 
+    public void dealCards(){
+        System.out.println("We would love to hand out some cards now.");
+    }
+
     //TODO:REMOVE
     public void exitApp() throws RemoteException{
         if(skeleton == null){
@@ -113,5 +117,9 @@ public class ClientStub {
         }
         System.out.println("mhm");
         skeleton.exitApp();
+    }
+
+    public void fold() throws RemoteException{
+        thePlayer.fold();
     }
 }

@@ -14,24 +14,30 @@ import java.util.ResourceBundle;
 
 public class CardRepresentation extends Label /*implements Initializable*/ {
 
+    private final static String PATH_TO_IMAGES = "../images";
+
     @FXML
     private ImageView ivSuit;
     @FXML
     private Label lblValue;
 
     public CardRepresentation(){
-        getStylesheets().add(this.getClass().getResource("../css/CardRepresentation.css").toExternalForm());
+        getStylesheets().add(this.getClass().getResource("CardRepresentation.css").toExternalForm());
     }
 
     public void setCard(ICard card){
         try{
-            Image image = new Image("../images/"+card.getSuit());
-            ivSuit.setImage(image);
-            lblValue.setText(""+card.getValue());
+            //String a = ""+this.getClass().getResource(PATH_TO_IMAGES+"/cardFaces/"+card.getSuit()+card.getValue()+".png");
+            //System.out.println(a);
+            this.setStyle(getStyle() + "-fx-background-image: url(\""+PATH_TO_IMAGES+"/cardFaces/"+card.getSuit()+card.getValue()+".png\");");
         }
         catch (Exception e){
-            
+
         }
+    }
+
+    public void obscure(){
+        this.setStyle(getStyle() + "-fx-background-image: url(\"../images/cardBack.png\");");
     }
 
 }

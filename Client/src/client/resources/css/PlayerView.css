@@ -16,7 +16,11 @@ Button{
     -fx-pref-width: 200;
     -fx-pref-height: 100;
 }
-
+HBox{
+    -fx-background-color:hotpink;
+    -fx-pref-width:500;
+    -fx-pref-height:500;
+}
 TextField{
 /*    -fx-pref-height: ;
 */  -fx-font-size: 16;

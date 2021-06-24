@@ -7,6 +7,7 @@ import remoteInterfaces.IPlayerManagement;
 import remoteInterfaces.IServerSkeleton;
 import server.player.Player;
 import server.player.PlayerManagement;
+import server.round.RoundLogic;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -32,9 +33,15 @@ public class ServerSkeleton extends UnicastRemoteObject implements IServerSkelet
         return PlayerManagement.getInstance();
     }
 
+    @Override
+    public int getLatestPlacedBid() throws RemoteException {
+        return RoundLogic.getInstance().getCurrentBettingRound().getLatestPlacedBid();
+    }
+
     //TODO:REMOVE
     @Override
     public void exitApp() throws RemoteException {
         System.exit(0);
     }
+
 }

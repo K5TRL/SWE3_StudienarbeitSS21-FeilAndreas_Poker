@@ -221,14 +221,14 @@ public class PlayerViewController extends ViewController{
 
     private void validateRaiseButtonText() throws RemoteException {
         if(Integer.parseInt(lblPlayerBet.getText())== ClientStub.getInstance().getThePlayer().getFunds()){
-        if(Integer.parseInt(lblPlayerBet.getText())==0){
-            btnRaise.setDisable(true);
+            if(Integer.parseInt(lblPlayerBet.getText())==0){
+                btnRaise.setDisable(true);
+            }
+            else btnRaise.setText("All In");
+        }/*somebody has set a bet before this player in this round false*/
+        else if(ClientStub.getInstance().getLatestPlacedBid() > 0){
+            btnRaise.setText("Raise");
         }
-        else btnRaise.setText("All In");
-    }
-    else if(/*somebody has set a bet before this player in this round*/false){
-        btnRaise.setText("Raise");
-    }
         //PROBLEM: we need to somehow send this over to the server too
         btnRaise.setOnAction(actionEvent -> {
             try{

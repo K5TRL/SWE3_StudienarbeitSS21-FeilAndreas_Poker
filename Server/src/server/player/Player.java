@@ -5,6 +5,7 @@ import remoteInterfaces.ICard;
 import remoteInterfaces.IPlayer;
 import server.GameLogic;
 import server.card.Card;
+import server.round.RoundLogic;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -73,6 +74,7 @@ public class Player extends UnicastRemoteObject implements IPlayer {
 
     public void bet(int betAmount){
         funds -= betAmount;
+        RoundLogic.getInstance().getCurrentBettingRound().setBetFromCurrentPlayerBetting(betAmount);
         System.out.println("Remaining Funds:\t"+funds);
     }
 

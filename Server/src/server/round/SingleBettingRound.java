@@ -57,7 +57,6 @@ public class SingleBettingRound {
         }
     }
     public void setBetFromCurrentPlayerBetting(int amount){
-        currentPlayerBetting.bet(amount);
         playerWhoSetMostRecentBet = currentPlayerBetting;
         latestBetPlaced = amount;
     }

@@ -140,4 +140,8 @@ public class ClientStub {
     public void fold() throws RemoteException{
         thePlayer.fold();
     }
+
+    public int getLatestPlacedBid() throws RemoteException{
+        return skeleton.getLatestPlacedBid();
+    }
 }

@@ -1,0 +1,6 @@
+PlayerHandRow{
+    -fx-border-color: black;
+    -fx-alignment: center_right;
+    -fx-spacing: 5;
+    -fx-padding: 0 50 10 0;
+}

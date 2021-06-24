@@ -82,6 +82,8 @@ public class GameLogic extends UnicastRemoteObject implements IGameLogic {
     }
 
 
+    //TODO: A LOT OF THESE SHOULD BE IN SERVER SKELETON INSTEAD.
+
     @Override
     public void startNewGame() throws RemoteException {
         System.out.println("Client has sent request to start new game!");

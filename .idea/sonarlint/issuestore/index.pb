@@ -25,8 +25,6 @@ O
 Server/src/server/Testface.java,2\d\2d3c00c8b6584d6a1a8b1184e7b2659596ac9e4f
 a
 1RemoteInterfaces/src/remoteInterfaces/ITable.java,7\8\78caa476b993a14117b4606d68b4076a8640fe6d
-r
-BClient/src/client/resources/view_components/PlayerActionsVBox.fxml,a\3\a37d9dbd26e79aee71d0134decb59a2d6f87d244
 n
 >Client/src/client/resources/view_components/TextComponent.fxml,d\6\d686226f0857dc5d277c0ce64c51e33fae01e992
 D
@@ -39,13 +37,9 @@ A
 Client/Client.iml,6\1\61b3d176786e0505b47b6a57aa1c18c8271f8e2b
 i
 9RemoteInterfaces/src/remoteInterfaces/IPlayerActions.java,3\7\378fb6ef862c82e3a32cf70a1e371ad451df06c9
-s
-CClient/src/client/resources/view_components/CardRepresentation.fxml,a\4\a4e4c3fcca5497b5d34582c70bea73cdc19ffa5c
 D
 Client/client.policy,8\3\830dc57b9a339f919e44fdca8a321822de132730
 l
 <RemoteInterfaces/src/remoteInterfaces/IPlayerManagement.java,5\7\571cbd42a60944ce40ea5465d245cb5f73687ecb
-W
-'Server/src/server/table/PokerTable.java,2\c\2c425eae9159a9dc34fa40ca82e4779d41c8b27d
 D
 Server/server.policy,c\1\c1db350ce709402578e7ada8a4dc9af4a45d9b85

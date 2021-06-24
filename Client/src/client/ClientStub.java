@@ -69,6 +69,15 @@ public class ClientStub {
         }
     }
 
+    public void startNewRound(){
+        try {
+            skeleton.getGameLogic().startNewRound();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void setBuyIn(int amount) throws RemoteException {
         skeleton.getGameLogic().changeBuyIn(amount);
     }

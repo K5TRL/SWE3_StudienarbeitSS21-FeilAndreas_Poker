@@ -94,6 +94,7 @@ public class PlayerViewController extends ViewController{
         btnRaise.setDisable(hasFolded);
         btnCall.setDisable(hasFolded);
         btnFold.setDisable(hasFolded);
+        btnDealCards.setDisable(!hasFolded);
     }
 
     private void setThePlayer() throws RemoteException {
@@ -159,10 +160,18 @@ public class PlayerViewController extends ViewController{
     private void setDealCardsButton() {
         btnDealCards.setText("Deal Cards");
         btnDealCards.setOnAction(actionEvent -> {
-            ClientStub.getInstance().dealCards();
+            try{
+                ClientStub.getInstance().startNewRound();
+                setHandCards();
+                disableAllButtons();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
         });
         try {
-            btnDealCards.setDisable(ClientStub.getInstance().getThePlayer().hasFolded());
+            //btnDealCards.setDisable(ClientStub.getInstance().getThePlayer().hasFolded());
+
         }
         catch (Exception e){
             e.printStackTrace();

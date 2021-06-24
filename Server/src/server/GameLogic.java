@@ -103,6 +103,11 @@ public class GameLogic extends UnicastRemoteObject implements IGameLogic {
     }
 
     @Override
+    public void startNewRound() throws RemoteException {
+        prepareNewRound();
+    }
+
+    @Override
     public void changeBuyIn(int amount) throws RemoteException {
         BUY_IN = amount;
         Blinds.getInstance().setBlinds();

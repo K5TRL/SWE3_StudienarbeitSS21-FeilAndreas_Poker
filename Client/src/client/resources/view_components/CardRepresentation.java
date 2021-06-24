@@ -29,7 +29,7 @@ public class CardRepresentation extends Label /*implements Initializable*/ {
         try{
             //String a = ""+this.getClass().getResource(PATH_TO_IMAGES+"/cardFaces/"+card.getSuit()+card.getValue()+".png");
             //System.out.println(a);
-            this.setStyle(getStyle() + "-fx-background-image: url(\""+PATH_TO_IMAGES+"/cardFaces/"+card.getSuit()+card.getValue()+".png\");");
+            this.setStyle(getStyle() + "-fx-background-image: url("+this.getClass().getResource(PATH_TO_IMAGES+"/cardFaces/"+card.getSuit()+card.getValue()+".png").toExternalForm()+");");
         }
         catch (Exception e){
 

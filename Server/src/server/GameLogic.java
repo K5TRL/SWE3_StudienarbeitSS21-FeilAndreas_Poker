@@ -40,7 +40,7 @@ public class GameLogic extends UnicastRemoteObject implements IGameLogic {
 
     public void prepareNewGame() throws RemoteException {
         preparePlayersForNewGame();
-        RoundLogic.getInstance().resetBettingRoundForNewGame();
+        RoundLogic.getInstance().newRound();
         PlayerManagement.getInstance().setDealerAndBlindsForNewGame();
         prepareNewRound();
     }
@@ -49,6 +49,7 @@ public class GameLogic extends UnicastRemoteObject implements IGameLogic {
         prepareAllCards();
         resetPlayersforNewRound();
         RoundLogic.getInstance().newRound();
+        //always makes players pay the blinds
         currentGameBeingPlayed.executeCurrentRoundRules();
     }
 
@@ -105,6 +106,11 @@ public class GameLogic extends UnicastRemoteObject implements IGameLogic {
     @Override
     public void startNewRound() throws RemoteException {
         prepareNewRound();
+    }
+
+    @Override
+    public void moveToNextBettingRound() throws RemoteException {
+        RoundLogic.getInstance().moveToNextRound();
     }
 
     @Override

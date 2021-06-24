@@ -47,6 +47,10 @@ public class PlayerViewController extends ViewController{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        update();
+    }
+
+    private void update(){
         try {
             setThePlayer();
             setListeners();
@@ -164,6 +168,7 @@ public class PlayerViewController extends ViewController{
                 ClientStub.getInstance().startNewRound();
                 setHandCards();
                 disableAllButtons();
+                update();
             }
             catch (Exception e){
                 e.printStackTrace();

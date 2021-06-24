@@ -69,6 +69,15 @@ public class ClientStub {
         }
     }
 
+    public void moveToNextBettingRound(){
+        try {
+            skeleton.getGameLogic().moveToNextBettingRound();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void startNewRound(){
         try {
             skeleton.getGameLogic().startNewRound();

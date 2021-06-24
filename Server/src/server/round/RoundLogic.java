@@ -23,7 +23,7 @@ public class RoundLogic {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        resetBettingRoundForNewGame();
+        resetBettingRoundForNewRound();
     }
     public static RoundLogic getInstance(){
         if(instance == null) instance = new RoundLogic();
@@ -34,12 +34,13 @@ public class RoundLogic {
         return currentBettingRoundNumber;
     }
 
-    public void resetBettingRoundForNewGame(){
+    public void resetBettingRoundForNewRound(){
         currentBettingRoundNumber = -1;
     }
 
     public void newRound() throws RemoteException {
         currentRound = new SingleBettingRound();
+        resetBettingRoundForNewRound();
         currentBettingRoundNumber++;
     }
 

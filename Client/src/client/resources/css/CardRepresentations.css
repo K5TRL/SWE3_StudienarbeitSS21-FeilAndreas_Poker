@@ -1,0 +1,7 @@
+.root{
+    -fx-pref-height:             300;
+    -fx-pref-width:              200;
+    -fx-alignment:            center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size:        100%;
+}

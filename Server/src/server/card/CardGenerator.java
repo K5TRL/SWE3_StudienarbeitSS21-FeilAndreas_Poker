@@ -19,7 +19,12 @@ public class CardGenerator {
         Stack<Card> allCards = new Stack<>();
         EnumSet.allOf(CardSuit.class).forEach(cardSuit -> {
             for(int i = 0; i<13; i++){
-                allCards.push(new Card(i, cardSuit));
+                try {
+                    allCards.push(new Card(i, cardSuit));
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
         return allCards;

@@ -1,0 +1,32 @@
+.root{
+    -fx-background-image: url("../images/MainMenuBackground.png");
+}
+
+VBox{
+    -fx-background-color: darkgreen;
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+}
+
+Button{
+    -fx-pref-width: 300px;
+    -fx-pref-height: 100px;
+    -fx-font-size: 26;
+}
+
+Label{
+    -fx-alignment: center;
+    -fx-font-size: 50;
+    -fx-max-width: 600;
+    -fx-text-fill: white;
+}
+TextField{
+    -fx-max-width: 500;
+    -fx-alignment: center;
+    -fx-font-size: 50;
+}
+HBox{
+    -fx-spacing: 50;
+    -fx-pref-width: 1920;
+    -fx-alignment: center;
+}

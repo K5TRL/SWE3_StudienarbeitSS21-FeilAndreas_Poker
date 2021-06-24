@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.ResourceBundle;
 
 public class MainMenuController extends ViewController{
@@ -52,6 +53,15 @@ public class MainMenuController extends ViewController{
     }
 
     private void setExitButton(){
-        btnQuitGame.setOnAction(actionEvent -> Platform.exit());
+        btnQuitGame.setOnAction(actionEvent -> {
+            try {
+                //TODO:REMOVE, this is implemented because it saves me the trouble of having to manually kill the server.
+                ClientStub.getInstance().exitApp();
+            }
+            catch (RemoteException e) {
+                e.printStackTrace();
+            }
+            Platform.exit();
+            });
     }
 }

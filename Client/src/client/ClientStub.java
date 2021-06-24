@@ -1,11 +1,9 @@
 package client;
 
-import remoteInterfaces.IGameActions;
 import remoteInterfaces.IPlayer;
 import remoteInterfaces.IPlayerManagement;
 import remoteInterfaces.IServerSkeleton;
 
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -18,6 +16,7 @@ public class ClientStub {
     private IPlayerManagement playerManagement;
     private IServerSkeleton skeleton;
     private IPlayer thePlayer;
+    private int minimalBetAllowed;
 
     private static ClientStub instance;
     private ClientStub(){
@@ -61,6 +60,7 @@ public class ClientStub {
             if(skeleton == null){
                 setSkeleton();
             }
+            minimalBetAllowed = skeleton.getGameLogic().getMinimalBetAllowed();
             skeleton.getGameLogic().startNewGame();
 //            gameActions.startNewGame();
         }
@@ -77,19 +77,41 @@ public class ClientStub {
         return skeleton.getGameLogic().getBuyIn();
     }
 
+    private void setPlayerManagement() throws RemoteException{
+            this.playerManagement = skeleton.getPlayerManagement();
+            System.out.println("We got Player Management");
+    }
+
     public IPlayerManagement getPlayerManagement(){
         return playerManagement;
     }
 
     public IPlayer getThePlayer() throws RemoteException {
         if(playerManagement == null){
-            this.playerManagement = skeleton.getPlayerManagement();
-            System.out.println("We got Player Management");
+            setPlayerManagement();
         }
         if(thePlayer == null){
             System.out.println("We tried getting the Player.");
             this.thePlayer = playerManagement.getPlayer("The Player");
         }
         return this.thePlayer;
+    }
+
+    public int getMinimalBetAllowed(){
+        return minimalBetAllowed;
+    }
+
+    public void decreaseFundsBy(int amount) throws RemoteException{
+        thePlayer.decreaseFundsBy(amount);
+    }
+
+    //TODO:REMOVE
+    public void exitApp() throws RemoteException{
+        if(skeleton == null){
+            setSkeleton();
+            System.out.println("yep");
+        }
+        System.out.println("mhm");
+        skeleton.exitApp();
     }
 }

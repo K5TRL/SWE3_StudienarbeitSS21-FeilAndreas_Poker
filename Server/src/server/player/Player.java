@@ -20,6 +20,7 @@ public class Player extends UnicastRemoteObject implements IPlayer {
         this.name = name;
         //funds = initialFunds;
         folded = false;
+        pocketCards = new ArrayList<>();
     }
 
     @Override
@@ -52,6 +53,7 @@ public class Player extends UnicastRemoteObject implements IPlayer {
 
     public void bet(int betAmount){
         funds -= betAmount;
+        System.out.println("Remaining Funds:\t"+funds);
     }
 
     private void throwAwayHand(){

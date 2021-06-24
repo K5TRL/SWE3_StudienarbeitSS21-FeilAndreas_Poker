@@ -1,9 +1,9 @@
-#vbMainMenuRoot{
-    -fx-background-size: 100%;
-}
 #vbButtons{
     -fx-background-color: rgba(50, 50, 50, 0.5);
 }
 #lblTitle{
     -fx-font-size: 62;
+}
+#lblInfo{
+    -fx-font-size: 12;
 }

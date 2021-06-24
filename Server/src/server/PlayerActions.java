@@ -31,7 +31,7 @@ public class PlayerActions implements IPlayerActions {
 
     @Override
     public void call() throws RemoteException {
-        RoundLogic.getInstance().getCurrentBettingRound().getCurrentPlayerBetting().bet(RoundLogic.getInstance().getCurrentBettingRound().getLatestBetPlaced());
+        //RoundLogic.getInstance().getCurrentBettingRound().getCurrentPlayerBetting().bet(RoundLogic.getInstance().getCurrentBettingRound().getLatestBetPlaced());
         continueToNextPlayer();
     }
 

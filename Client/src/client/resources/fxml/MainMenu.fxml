@@ -16,6 +16,7 @@
         <Button fx:id="btnQuitGame" text="Beenden"/>
     </VBox>
     <stylesheets>
+        <URL value="@../css/global.css"/>
         <URL value="@../css/MainMenu.css"/>
     </stylesheets>
 </VBox>

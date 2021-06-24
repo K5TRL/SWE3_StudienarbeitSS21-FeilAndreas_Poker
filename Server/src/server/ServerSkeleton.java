@@ -1,5 +1,6 @@
 package server;
 
+import javafx.application.Platform;
 import remoteInterfaces.IGameLogic;
 import remoteInterfaces.IPlayer;
 import remoteInterfaces.IPlayerManagement;
@@ -29,5 +30,11 @@ public class ServerSkeleton extends UnicastRemoteObject implements IServerSkelet
     @Override
     public IPlayerManagement getPlayerManagement() throws RemoteException {
         return PlayerManagement.getInstance();
+    }
+
+    //TODO:REMOVE
+    @Override
+    public void exitApp() throws RemoteException {
+        System.exit(0);
     }
 }

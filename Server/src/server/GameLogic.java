@@ -1,6 +1,5 @@
 package server;
 
-import remoteInterfaces.IGameActions;
 import remoteInterfaces.IGameLogic;
 import server.card.AllCards;
 import server.game_type.GameType;
@@ -8,13 +7,14 @@ import server.game_type.TexasHoldEm;
 import server.player.Player;
 import server.player.PlayerManagement;
 import server.round.RoundLogic;
+import server.settings.Blinds;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 public class GameLogic extends UnicastRemoteObject implements IGameLogic {
 
-    private int BUY_IN = 7000;
+    private int BUY_IN = 1000;
     private static GameLogic instance;
     private GameType currentGameBeingPlayed;
 
@@ -41,6 +41,7 @@ public class GameLogic extends UnicastRemoteObject implements IGameLogic {
         preparePlayersForNewGame();
         RoundLogic.getInstance().resetBettingRoundForNewGame();
         PlayerManagement.getInstance().setDealerAndBlindsForNewGame();
+        prepareNewRound();
     }
 
     public void prepareNewRound() throws RemoteException {
@@ -98,6 +99,17 @@ public class GameLogic extends UnicastRemoteObject implements IGameLogic {
     @Override
     public void changeBuyIn(int amount) throws RemoteException {
         BUY_IN = amount;
+        Blinds.getInstance().setBlinds();
+    }
+
+    @Override
+    public int getMinimalBetAllowed(){
+        int latestPlacedBid = RoundLogic.getInstance().getCurrentBettingRound().getLatestPlacedBid();
+        int bigBlind = Blinds.getInstance().getBigBlindAmount();
+        if(latestPlacedBid>bigBlind){
+            return latestPlacedBid;
+        }
+        return bigBlind;
     }
 
 

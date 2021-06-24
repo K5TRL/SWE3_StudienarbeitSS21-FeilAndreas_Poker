@@ -1,14 +1,26 @@
 package server.settings;
 
+import server.GameLogic;
+
 public class Blinds {
     private static Blinds instance;
     private int smallBlind;
     private int bigBlind;
 
     private Blinds(){
-        smallBlind = 100;
-        bigBlind = smallBlind*2;
+        setBlinds();
     }
+
+    public void setBlinds(){
+        try{
+            smallBlind = (int)(GameLogic.getInstance().getBuyIn()*0.025);
+            bigBlind = smallBlind*2;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public static Blinds getInstance(){
         if(instance==null){
             instance = new Blinds();

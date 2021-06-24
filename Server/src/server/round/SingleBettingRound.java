@@ -20,6 +20,7 @@ public class SingleBettingRound {
     private ArrayList<Player> allPlayers;
 
     public SingleBettingRound() throws RemoteException {
+        potsCreatedInThisRound = new ArrayList<>();
         potsCreatedInThisRound.add(new Pot(PlayerManagement.getInstance().getAllPlayers()));
         currentPot = potsCreatedInThisRound.get(0);
         ArrayList<Player> allPlayers = PlayerManagement.getInstance().getAllPlayers();
@@ -73,5 +74,9 @@ public class SingleBettingRound {
             return latestBetPlaced;
         }
         else return Blinds.getInstance().getSmallBlindAmount();
+    }
+
+    public int getLatestPlacedBid(){
+        return latestBetPlaced;
     }
 }

@@ -12,12 +12,14 @@
     <VBox fx:id="vbButtons">
         <Label text="Buy In:"/>
         <TextField fx:id="tfBuyIn"/>
+        <Label fx:id="lblInfo" text="Die Blinds werden automatisch berechnet."/>
         <HBox>
             <Button fx:id="btnAccept" text="Annehmen"/>
             <Button fx:id="btnAbort" text="Abbrechen"/>
         </HBox>
     </VBox>
     <stylesheets>
-        <URL value="@../css/MainMenu.css"/>
+        <URL value="@../css/global.css"/>
+        <URL value="@../css/PlayerSettings.css"/>
     </stylesheets>
 </VBox>

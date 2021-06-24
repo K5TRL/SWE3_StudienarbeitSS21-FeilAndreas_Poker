@@ -8,13 +8,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import remoteInterfaces.IPlayer;
 
 import java.net.URL;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.util.ResourceBundle;
 
 public class PlayerViewController extends ViewController{
@@ -38,41 +34,7 @@ public class PlayerViewController extends ViewController{
     protected PlayerViewController(SceneController viewLoader, String fxmlPath) {
         super(viewLoader, fxmlPath);
     }
-    private IPlayer thePlayer;
     private SimpleIntegerProperty remainingPlayerFunds;
-
-//    private IPlayer player = new IPlayer() {
-//        private int funds = 1000;
-//        private SimpleIntegerProperty fundsProperty;
-//        private String name = "Andreas";
-//
-//        @Override
-//        public SimpleIntegerProperty getFunds() {
-//            fundsProperty = new SimpleIntegerProperty(funds);
-//            fundsProperty.addListener(new ChangeListener<Number>(){
-//                @Override
-//                public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1){
-//                    setLabels();
-//                    setSlider();
-//                    setButtons();
-//                }
-//            });
-//            return fundsProperty;
-//        }
-//
-//        @Override
-//        public String getName() {
-//            return name;
-//        }
-//
-//        @Override
-//        public void decreaseFundsBy(int amount) {
-//            //fundsProperty.set(funds-amount);
-//            System.out.println("Amount:\t"+amount);
-//            fundsProperty.set(funds-=amount);
-//            System.out.println("Left:\t"+fundsProperty.getValue().intValue());
-//        }
-//    };
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -85,21 +47,14 @@ public class PlayerViewController extends ViewController{
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-//        try {
-//            removeThisMethod();
-//        } catch (NotBoundException e) {
-//            e.printStackTrace();
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        }
     }
 
     private void setThePlayer() throws RemoteException {
         if(ClientStub.getInstance().getThePlayer() != null){
-            thePlayer= ClientStub.getInstance().getThePlayer();
-            remainingPlayerFunds = new SimpleIntegerProperty(thePlayer.getFunds());
+            remainingPlayerFunds = new SimpleIntegerProperty(ClientStub.getInstance().getThePlayer().getFunds());
             setFundsListener();
         }
+        else getViewLoader().loadMainMenu();
     }
 
     private void setFundsListener() {
@@ -118,20 +73,19 @@ public class PlayerViewController extends ViewController{
             });
     }
 
-    private void removeThisMethod() throws NotBoundException, RemoteException {
-        Registry registry = LocateRegistry.getRegistry(8090);
-        this.thePlayer = (IPlayer) registry.lookup(IPlayer.class.getName());
-    }
-
     private void setLabels() throws RemoteException {
-        lblPlayerName.setText(thePlayer.getName());
-        lblPlayerFunds.setText(""+remainingPlayerFunds.getValue().intValue());
+        lblPlayerName.setText(ClientStub.getInstance().getThePlayer().getName());
+        lblPlayerFunds.setText(""+ClientStub.getInstance().getThePlayer().getFunds());
     }
 
     private void setSlider() throws RemoteException {
         setSliderListener();
-        sldrRaiseAmount.setMin(/*getMinAmountFromServer*/100);
-        sldrRaiseAmount.setMax(remainingPlayerFunds.getValue().intValue());
+        int minBetAllowed = ClientStub.getInstance().getMinimalBetAllowed();
+        if(minBetAllowed>ClientStub.getInstance().getThePlayer().getFunds()){
+            sldrRaiseAmount.setDisable(true);
+        }
+        sldrRaiseAmount.setMin(minBetAllowed);
+        sldrRaiseAmount.setMax(ClientStub.getInstance().getThePlayer().getFunds());
     }
 
     private void setSliderListener() {
@@ -147,10 +101,6 @@ public class PlayerViewController extends ViewController{
                 }
             }
         });
-    }
-
-    private void setAllIn(){
-        btnRaise.setText("All In");
     }
 
     private void setButtons() throws RemoteException {
@@ -185,7 +135,7 @@ public class PlayerViewController extends ViewController{
     }
 
     private void validateRaiseButtonText() throws RemoteException {
-        if(Integer.parseInt(lblPlayerBet.getText())== remainingPlayerFunds.getValue().intValue()){
+        if(Integer.parseInt(lblPlayerBet.getText())== ClientStub.getInstance().getThePlayer().getFunds()){
         if(Integer.parseInt(lblPlayerBet.getText())==0){
             btnRaise.setDisable(true);
         }
@@ -197,8 +147,10 @@ public class PlayerViewController extends ViewController{
         //PROBLEM: we need to somehow send this over to the server too
         btnRaise.setOnAction(actionEvent -> {
             try{
-                int a = remainingPlayerFunds.getValue().intValue();
+                int a = ClientStub.getInstance().getThePlayer().getFunds();
+                ClientStub.getInstance().getThePlayer().decreaseFundsBy(Integer.parseInt(lblPlayerBet.getText()));
                 remainingPlayerFunds.set(a - Integer.parseInt(lblPlayerBet.getText()));
+                //ClientStub.getInstance().decreaseFundsBy();
                 //thePlayer.decreaseFundsBy(Integer.parseInt(lblPlayerBet.getText()));
             }
             catch (Exception e){

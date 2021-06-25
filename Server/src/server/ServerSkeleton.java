@@ -34,6 +34,11 @@ public class ServerSkeleton extends UnicastRemoteObject implements IServerSkelet
     }
 
     @Override
+    public IRoundLogic getRoundLogic() throws RemoteException {
+        return RoundLogic.getInstance();
+    }
+
+    @Override
     public int getLatestPlacedBid() throws RemoteException {
         return RoundLogic.getInstance().getCurrentBettingRound().getLatestPlacedBid();
     }
@@ -46,7 +51,7 @@ public class ServerSkeleton extends UnicastRemoteObject implements IServerSkelet
 
     @Override
     public void continueToNextPlayer() throws RemoteException {
-        //RoundLogic.getInstance().moveToNextRound();
+        GameLogic.getInstance().prepareNewSingleBettingRound();
     }
 
     @Override

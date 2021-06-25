@@ -36,6 +36,8 @@ public class PlayerViewController extends ViewController{
     @FXML
     private Label lblPlayerFunds;
     @FXML
+    private Label lblPot;
+    @FXML
     private PlayerHandRow playerHandRow;
     @FXML
     private CommunityRow communityRow;
@@ -97,11 +99,14 @@ public class PlayerViewController extends ViewController{
     }
 
     private void disableAllButtons() throws RemoteException{
-        boolean hasFolded = ClientStub.getInstance().getThePlayer().hasFolded();
-        btnRaise.setDisable(hasFolded);
-        btnCall.setDisable(hasFolded);
-        btnFold.setDisable(hasFolded);
-        btnDealCards.setDisable(!hasFolded);
+        boolean disable = false;
+        if(ClientStub.getInstance().getCurrentBettingRoundNumber()>=3 || ClientStub.getInstance().getThePlayer().hasFolded()){
+            disable = true;
+        }
+        btnRaise.setDisable(disable);
+        btnCall.setDisable(disable);
+        btnFold.setDisable(disable);
+        btnDealCards.setDisable(!disable);
     }
 
     private void setThePlayer() throws RemoteException {
@@ -171,6 +176,7 @@ public class PlayerViewController extends ViewController{
                 ClientStub.getInstance().startNewRound();
                 setHandCards();
                 disableAllButtons();
+                communityRow.setCommunityCards(ClientStub.getInstance().getCommunityCards());
                 update();
             }
             catch (Exception e){

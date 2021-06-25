@@ -9,6 +9,10 @@ public class CommunityRow extends PlayerHandRow {
 
     public CommunityRow(){
         getStylesheets().add(this.getClass().getResource("CommunityRow.css").toExternalForm());
+        setStackRepresentation();
+    }
+
+    private void setStackRepresentation(){
         var stackRepresentation = new CardRepresentation();
         stackRepresentation.setStyle(getStyle() + "-fx-effect: dropshadow(gaussian,black,5,0,5,5);");
         stackRepresentation.obscure();
@@ -16,6 +20,8 @@ public class CommunityRow extends PlayerHandRow {
     }
 
     public void setCommunityCards(ArrayList<ICard> cards){
+        getChildren().clear();
+        setStackRepresentation();
         try{
             for(ICard card : ClientStub.getInstance().getCommunityCards()){
                 var cardRepresentation = new CardRepresentation();

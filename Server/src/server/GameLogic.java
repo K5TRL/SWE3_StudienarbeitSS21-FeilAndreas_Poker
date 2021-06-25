@@ -9,6 +9,7 @@ import server.player.Player;
 import server.player.PlayerManagement;
 import server.round.RoundLogic;
 import server.settings.Blinds;
+import server.table.PokerTable;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -47,6 +48,7 @@ public class GameLogic extends UnicastRemoteObject implements IGameLogic {
 
     public void prepareNewRound() throws RemoteException {
         prepareAllCards();
+        PokerTable.getInstance().clearTable();
         resetPlayersforNewRound();
         RoundLogic.getInstance().newRound();
         //always makes players pay the blinds
@@ -56,6 +58,7 @@ public class GameLogic extends UnicastRemoteObject implements IGameLogic {
     public void prepareNewSingleBettingRound() throws RemoteException {
         preparePlayersForNewSingleBettingRound();
         RoundLogic.getInstance().newSingleBettingRound();
+        currentGameBeingPlayed.executeCurrentRoundRules();
     }
     public void preparePlayersForNewSingleBettingRound(){
 
@@ -129,7 +132,7 @@ public class GameLogic extends UnicastRemoteObject implements IGameLogic {
     }
 
     @Override
-    public int getMinimalBetAllowed(){
+    public int getMinimalBetAllowed() throws RemoteException {
         int latestPlacedBid = RoundLogic.getInstance().getCurrentBettingRound().getLatestPlacedBid();
         int bigBlind = Blinds.getInstance().getBigBlindAmount();
         if(latestPlacedBid>bigBlind){

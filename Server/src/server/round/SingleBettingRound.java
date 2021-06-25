@@ -36,6 +36,10 @@ public class SingleBettingRound {
         }
     }
 
+    public Pot getCurrentPot(){
+        return currentPot;
+    }
+
     private boolean roundIsCompleted(){
 //        ArrayList<Player> allPlayers = PlayerManagement.getInstance().getAllPlayers();
         int index = allPlayers.indexOf(currentPlayerBetting);
@@ -48,7 +52,7 @@ public class SingleBettingRound {
 
     public void switchToNextBettingPlayer() throws RemoteException {
         if(roundIsCompleted()){
-            addPotsToTable();
+            //addPotsToTable();
             GameLogic.getInstance().prepareNewRound();
         }
         else{

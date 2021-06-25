@@ -154,4 +154,8 @@ public class ClientStub {
     public ArrayList<ICard> getCommunityCards() throws RemoteException{
         return skeleton.getCardsOnTable();
     }
+
+    public int getCurrentBettingRoundNumber() throws RemoteException{
+        return skeleton.getRoundLogic().getCurrentBettingRoundNumber();
+    }
 }

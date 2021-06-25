@@ -1,11 +1,14 @@
 package server.round;
 
+import remoteInterfaces.IRoundLogic;
 import server.GameLogic;
 import server.player.Player;
+import server.table.PokerTable;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-public class RoundLogic {
+public class RoundLogic extends UnicastRemoteObject implements IRoundLogic {
 //    private Player currentDealer;
 //    private Player smallBlind;
 //    private Player bigBlind;
@@ -17,7 +20,8 @@ public class RoundLogic {
 
     private static RoundLogic instance;
 
-    private RoundLogic(){
+    private RoundLogic() throws RemoteException {
+        super();
         try {
             currentRound = new SingleBettingRound();
         } catch (RemoteException e) {
@@ -25,11 +29,12 @@ public class RoundLogic {
         }
         resetBettingRoundForNewRound();
     }
-    public static RoundLogic getInstance(){
+    public static RoundLogic getInstance() throws RemoteException {
         if(instance == null) instance = new RoundLogic();
         return instance;
     }
 
+    @Override
     public int getCurrentBettingRoundNumber(){
         return currentBettingRoundNumber;
     }
@@ -45,6 +50,8 @@ public class RoundLogic {
     }
 
     public void newSingleBettingRound() throws RemoteException{
+        //PokerTable.getInstance().addPotToTable(currentRound.get);
+        PokerTable.getInstance().addPotToTable(RoundLogic.getInstance().getCurrentBettingRound().getCurrentPot());
         currentRound = new SingleBettingRound();
         currentBettingRoundNumber++;
     }

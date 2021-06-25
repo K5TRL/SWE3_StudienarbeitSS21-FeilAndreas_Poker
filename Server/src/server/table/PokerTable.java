@@ -16,6 +16,7 @@ public class PokerTable {
 
     private PokerTable() throws RemoteException {
         potsInPlay = new ArrayList<>();
+        cardsOnTable = new ArrayList<>();
         potsInPlay.add(new Pot(PlayerManagement.getInstance().getAllPlayers()));
     }
 
@@ -28,7 +29,7 @@ public class PokerTable {
 
     public void addPotToTable(Pot pot){
         potsInPlay.add(pot);
-        poolAllPossiblePots();
+        //poolAllPossiblePots();
     }
 
     private void poolAllPossiblePots(){
@@ -66,6 +67,10 @@ public class PokerTable {
 
     public RandomAccess getAllCardsOnTable(){
         return cardsOnTable;
+    }
+
+    public void clearTable(){
+        cardsOnTable.clear();
     }
 
 }

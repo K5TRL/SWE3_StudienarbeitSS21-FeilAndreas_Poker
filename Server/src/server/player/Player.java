@@ -6,7 +6,9 @@ import remoteInterfaces.IPlayer;
 import server.GameLogic;
 import server.card.Card;
 import server.round.RoundLogic;
+import server.table.PokerTable;
 
+import java.math.RoundingMode;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -50,7 +52,7 @@ public class Player extends UnicastRemoteObject implements IPlayer {
     }
 
     @Override
-    public void decreaseFundsBy(int amount) {
+    public void decreaseFundsBy(int amount) throws RemoteException {
         bet(amount);
     }
 
@@ -72,9 +74,10 @@ public class Player extends UnicastRemoteObject implements IPlayer {
         this.funds = funds;
     }
 
-    public void bet(int betAmount){
+    public void bet(int betAmount) throws RemoteException {
         funds -= betAmount;
         RoundLogic.getInstance().getCurrentBettingRound().setBetFromCurrentPlayerBetting(betAmount);
+        RoundLogic.getInstance().getCurrentBettingRound().getCurrentPot().increasPotBy(betAmount);
         System.out.println("Remaining Funds:\t"+funds);
     }
 

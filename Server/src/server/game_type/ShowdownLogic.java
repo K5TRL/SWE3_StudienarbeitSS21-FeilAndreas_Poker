@@ -7,14 +7,14 @@ import server.table.PokerTable;
 import server.table.Pot;
 
 import java.rmi.RemoteException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 //FOR VALIDATION OF HANDS, DETERMINING WHICH HAND IS THE HIGHEST POSSIBLE FOR EACH PLAYER STILL IN PLAY + DETERMINING WHICH PLAYER WINS WHICH POT
 public class ShowdownLogic {
     private static ShowdownLogic instance;
-    private LinkedList<Player> hierarchyOfPlayers;
+    private ArrayList<Player> hierarchyOfPlayers;
     private ShowdownLogic(){
-
+        hierarchyOfPlayers = new ArrayList<>();
     }
     public static ShowdownLogic getInstance(){
         if(instance == null){

@@ -22,7 +22,6 @@ public class CardGenerator {
                 try {
                     Card card = new Card(i, cardSuit);
                     allCards.push(card);
-                    System.out.println("Card added\t"+card.getSuit()+card.getValue());
                 }
                 catch (Exception e){
                     e.printStackTrace();

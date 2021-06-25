@@ -16,6 +16,9 @@
             </top>
             <center>
                 <BorderPane>
+                    <left>
+                        <Label fx:id="lblPot"/>
+                    </left>
                     <center>
                         <CommunityRow fx:id="communityRow"/>
                     </center>

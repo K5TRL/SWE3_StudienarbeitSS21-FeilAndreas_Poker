@@ -19,8 +19,6 @@ Y
 )Server/src/server/Card/CardGenerator.java,3\2\3223bdd7aafca002ae9361f91c03fe2dec0c72fa
 V
 &Server/src/server/game_type/Omaha.java,0\8\088cd4a55a7f1241a9f3f0fba63543e35cd825a0
-P
- Server/src/server/table/Pot.java,7\9\79ec42a83c1c4a666f39c71042c442d069d81c4d
 O
 Server/src/server/Testface.java,2\d\2d3c00c8b6584d6a1a8b1184e7b2659596ac9e4f
 a

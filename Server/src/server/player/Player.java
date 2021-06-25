@@ -79,24 +79,11 @@ public class Player extends UnicastRemoteObject implements IPlayer {
         funds -= betAmount;
         RoundLogic.getInstance().getCurrentBettingRound().setBetFromCurrentPlayerBetting(betAmount);
         RoundLogic.getInstance().getCurrentBettingRound().getCurrentPot().increasPotBy(betAmount);
-        System.out.println("Remaining Funds:\t"+funds);
     }
 
     private void throwAwayHand(){
         pocketCards.clear();
     }
-
-//    public ArrayList<Card> getPocketCards(){
-//        return pocketCards;
-//    }
-//    //TODO: DELETE, FOR DEMO-PURPOSES ONLY
-////    public int getHandValue(){
-////        int pointValue = 0;
-////        for(Card card : pocketCards){
-////            pointValue += card.getValue();
-////        }
-//        return pointValue;
-//    }
 
     @Override
     public void fold() throws RemoteException{
@@ -105,7 +92,6 @@ public class Player extends UnicastRemoteObject implements IPlayer {
         for (Pot pot : PokerTable.getInstance().getAllPotsInPlay()) {
             pot.removePlayerEligitability(this);
         }
-        System.out.println("Folded:\t"+folded);
     }
 
     public void resetBooleanFoldedForNewRound() {

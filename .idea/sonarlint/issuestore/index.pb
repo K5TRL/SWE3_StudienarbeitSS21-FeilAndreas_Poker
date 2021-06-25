@@ -1,8 +1,6 @@
 
 J
 src/sample/Controller.java,a\9\a952ee24ccaf329067caf45d8e61416ce808b0ea
-d
-4RemoteInterfaces/src/remoteInterfaces/ITestface.java,a\7\a7c812843b8373720e5acb41dd2b2c4681135fbc
 N
 .idea/libraries/javafx_swt.xml,8\b\8b1fb17263788d9d0e3b511edaedee05b8afe4d6
 U
@@ -17,22 +15,10 @@ T
 $Server/src/server/Card/CardSuit.java,5\4\54f7255da21dfaec5e04cc19428a77b79a3ff737
 Y
 )Server/src/server/Card/CardGenerator.java,3\2\3223bdd7aafca002ae9361f91c03fe2dec0c72fa
-V
-&Server/src/server/game_type/Omaha.java,0\8\088cd4a55a7f1241a9f3f0fba63543e35cd825a0
-O
-Server/src/server/Testface.java,2\d\2d3c00c8b6584d6a1a8b1184e7b2659596ac9e4f
-a
-1RemoteInterfaces/src/remoteInterfaces/ITable.java,7\8\78caa476b993a14117b4606d68b4076a8640fe6d
 D
 src/sample/Main.java,a\d\ad8e8bd4ff8f02a914e3d9ca1bcc32dfc8c503a9
-U
-%Client/src/client/ClientLauncher.java,0\0\00b28e4523c96b68149d7250ad49d6b493c310de
-Q
-!Client/src/client/ClientMain.java,7\7\77d118413b8692359b1dd1f797c3abcdee099ba9
 A
 Client/Client.iml,6\1\61b3d176786e0505b47b6a57aa1c18c8271f8e2b
-i
-9RemoteInterfaces/src/remoteInterfaces/IPlayerActions.java,3\7\378fb6ef862c82e3a32cf70a1e371ad451df06c9
 D
 Client/client.policy,8\3\830dc57b9a339f919e44fdca8a321822de132730
 D
@@ -41,31 +27,11 @@ j
 :Client/src/client/resources/controller/ViewController.java,1\6\1670a48007779a047eb79ee454b3de24803dd31b
 g
 7Client/src/client/resources/controller/IViewLoader.java,8\f\8f0d12ed93be5c72386cbd582cf068bc5d8dec8c
-V
-&Server/src/server/settings/Blinds.java,8\5\850d4b1bb641b44741894559db72e567af36b5ac
 b
 2Client/src/client/resources/css/PlayerSettings.css,d\7\d7f32ed420946d54a32c443e7c856d0a56edd20e
-P
- Server/src/server/card/Card.java,4\8\48b196bb47a6649b4940a26360f763846567168f
-`
-0RemoteInterfaces/src/remoteInterfaces/ICard.java,3\6\36b426ed54f273f4968aed69a165c0113314ee3f
 \
 ,Client/src/client/resources/css/MainMenu.css,7\2\72a3b81d96d459670045d97459f43da236712f26
-Y
-)Server/src/server/game_type/GameType.java,6\1\612d2bf492c7a1884db6bf489aaae836d2200dfa
-T
-$Server/src/server/card/CardSuit.java,5\4\54a68739233d5c14438fb09deec050b63c8f2fa3
-T
-$Server/src/server/card/AllCards.java,0\f\0fabf6471764e2c2de75a896b3200f3a1e8a6281
 Z
 *Client/src/client/resources/css/global.css,2\2\22536573a28ce0ab3e6373afbb82526afc5c23c1
-e
-5RemoteInterfaces/src/remoteInterfaces/IGameLogic.java,1\9\19e5395720391ab7f51a9ebf649586a49aabcf83
-Y
-)Server/src/server/card/CardGenerator.java,2\0\20c58f3d7598eabfcb6f6341ea8fb0787b8887ef
 l
 <Client/src/client/resources/view_components/CommunityRow.css,3\9\39ab5403c3cd0496d5c61d3bc5a5848e24facccd
-W
-'Server/src/server/table/PokerTable.java,2\c\2c425eae9159a9dc34fa40ca82e4779d41c8b27d
-_
-/Server/src/server/round/SingleBettingRound.java,0\4\04b086055f0c26f9eb71f6ebf08f154a1e7d43b6

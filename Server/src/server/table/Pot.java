@@ -12,7 +12,6 @@ public class Pot {
     public Pot(ArrayList playersEligibleForWinnings){
         this.playersEligibleForWinnings = new ArrayList<>();
         playersEligibleForWinnings.forEach(player -> this.playersEligibleForWinnings.add((Player)player));
-        //this.playersEligibleForWinnings = playersEligibleForWinnings;
         amountOfWinningsInPot = 0;
         checkIfPotContested();
     }
@@ -38,14 +37,6 @@ public class Pot {
         amountOfWinningsInPot+=amount;
     }
 
-//    public void payOutPot(){
-//        for(Player player : playersEligibleForWinnings){
-//            if(true /*TODO: VALIDATION: IS PLAYER WITH HIGHEST HAND ELIGIBLE FOR THIS POT? IF NOT CONTINUE. QUESTION: WHERE DO WE VALIDATE A CHRONOLOGICAL ORDER OF PLAYERS BASED ON STRENGTH OF HAND?*/){
-//                player.addFunds(amountOfWinningsInPot);
-//                amountOfWinningsInPot = 0;
-//            }
-//        }
-//    }
 
     public ArrayList<Player> getPlayersEligibleForWinnings(){
         return playersEligibleForWinnings;

@@ -25,7 +25,6 @@ public class PlayerHandRow extends HBox {
                 var cardRepresentation = new CardRepresentation();
                 cardRepresentation.setCard(card);
                 getChildren().add(cardRepresentation);
-                System.out.println("Card\t"+card.getSuit()+card.getValue()+" has been added to the Hand.");
             }
         }
         catch(Exception e){

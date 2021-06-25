@@ -5,9 +5,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import remoteInterfaces.IPlayer;
-import remoteInterfaces.IPlayerActions;
-import remoteInterfaces.ITestface;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -18,17 +15,9 @@ public class ClientMain extends Application {
 
     public static Stage primaryStage;
 
-    public static void startClient() throws RemoteException, NotBoundException {
-        Registry registry = LocateRegistry.getRegistry(8088);
-        ITestface testface = (ITestface) registry.lookup(ITestface.class.getName());
-        registry = LocateRegistry.getRegistry(8089);
-        IPlayerActions playerActions = (IPlayerActions) registry.lookup(IPlayerActions.class.getName());
-         playerActions.call();
-    }
     public static void main(String[] args) throws InterruptedException, NotBoundException, RemoteException {
         System.out.println("Client boot successful.");
         launch(args);
-        //startClient();
     }
 
     @Override
@@ -46,12 +35,4 @@ public class ClientMain extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
-    public static Stage getPrimaryStage() {
-        return primaryStage;
-    }
-
-    //    private static void startApp() {
-//        SceneController.getInstance().loadMainMenu();
-//    }
 }

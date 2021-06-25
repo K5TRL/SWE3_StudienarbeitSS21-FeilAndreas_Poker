@@ -48,12 +48,10 @@ public class TexasHoldEm extends GameType{
     public void payBlinds() throws RemoteException {
         PlayerManagement.getInstance().getSmallBlindPlayer().bet(Blinds.getInstance().getSmallBlindAmount());
         PlayerManagement.getInstance().getBigBlindPlayer().bet(Blinds.getInstance().getBigBlindAmount());
-        System.out.println("payBlinds");
     }
     //public void moveToNextRound(){}
 
     public void initiateFlop(){
-        System.out.println("doFlop");
         AllCards.getInstance().burnCard();
         ArrayList<Card> list = new ArrayList();
         for(int i = 0; i<3; i++){
@@ -63,7 +61,6 @@ public class TexasHoldEm extends GameType{
     }
 
     public void initiateTurn(){
-        System.out.println("makeTurn");
         AllCards.getInstance().burnCard();
         ArrayList<Card> list = new ArrayList();
         for(int i = 0; i<1; i++){
@@ -73,7 +70,6 @@ public class TexasHoldEm extends GameType{
     }
 
     public void initateRiver(){
-        System.out.println("crossRiver");
         AllCards.getInstance().burnCard();
         ArrayList<Card> list = new ArrayList();
         for(int i = 0; i<1; i++){
@@ -86,7 +82,6 @@ public class TexasHoldEm extends GameType{
         for (Card card : list) {
             try {
                 PokerTable.getInstance().addCardToTable(card);
-                System.out.println("Community card added to table:\t"+card.getSuit()+card.getValue());
             }
             catch (Exception e){
                 e.printStackTrace();

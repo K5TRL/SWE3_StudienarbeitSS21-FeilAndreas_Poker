@@ -20,11 +20,6 @@ public class AllCards {
 
     public void resetFullDeckOfCards(){
         allCards = CardGenerator.getInstance().createFullDeck();
-//        EnumSet.allOf(CardSuit.class).forEach(cardSuit -> {
-//            for(int i = 0; i<13; i++){
-//                allCards.add(new Card(i, cardSuit));
-//            }
-//        });
     }
 
     public void shuffleDeck(){

@@ -16,13 +16,9 @@ public abstract class GameType {
     public int getAmountOfCardsAllowedOnHand(){
         return amountOfCardsAllowedOnHand;
     }
-    public String getNameOfTheGame(){
-        return nameOfTheGame;
-    }
     public int getAmountOfBettingRoundsAllowedPerGame(){
         return amountOfBettingRoundsAllowedPerGame;
     }
     public void executeCurrentRoundRules() throws RemoteException {}
-    //public void moveToNextRound(){}
 
 }

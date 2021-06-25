@@ -29,7 +29,6 @@ public class PokerTable {
 
     public void addPotToTable(Pot pot){
         potsInPlay.add(pot);
-        //poolAllPossiblePots();
     }
 
     private void poolAllPossiblePots(){
@@ -44,19 +43,6 @@ public class PokerTable {
         }
     }
 
-//    private boolean canBePooled(Pot potOne, Pot potTwo){
-//        if(potOne.getPlayersEligibleForWinnings().equals(potTwo.getPlayersEligibleForWinnings())){
-//            return true;
-//        }
-//        return false;
-//    }
-
-/*THIS INSTEAD HAPPENS IN SINGLE ROUND
-*
-*    public void addPotToTable(ArrayList<Player> eligiblePlayers){
-*        potsInPlay.add(new Pot(eligiblePlayers));
-*    }
-*/
     public void addCardToTable(Card card){
         cardsOnTable.add(card);
     }

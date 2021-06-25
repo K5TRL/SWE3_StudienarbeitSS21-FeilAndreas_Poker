@@ -1,8 +1,5 @@
 package remoteInterfaces;
 
-import server.card.Card;
-import server.card.CardSuit;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 

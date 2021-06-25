@@ -58,13 +58,11 @@ public class ClientStub {
             if(registry == null){
                 setRegistry();
             }
-//            IGameActions gameActions = (IGameActions) registry.lookup(IGameActions.class.getName());
             if(skeleton == null){
                 setSkeleton();
             }
             minimalBetAllowed = skeleton.getGameLogic().getMinimalBetAllowed();
             skeleton.getGameLogic().startNewGame();
-//            gameActions.startNewGame();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -99,7 +97,6 @@ public class ClientStub {
 
     private void setPlayerManagement() throws RemoteException{
             this.playerManagement = skeleton.getPlayerManagement();
-            System.out.println("We got Player Management");
     }
 
     public IPlayerManagement getPlayerManagement(){
@@ -111,7 +108,6 @@ public class ClientStub {
             setPlayerManagement();
         }
         if(thePlayer == null){
-            System.out.println("We tried getting the Player.");
             this.thePlayer = playerManagement.getPlayer("The Player");
         }
         return this.thePlayer;
@@ -125,17 +121,11 @@ public class ClientStub {
         thePlayer.decreaseFundsBy(amount);
     }
 
-    public void dealCards(){
-        System.out.println("We would love to hand out some cards now.");
-    }
-
-    //TODO:REMOVE
+    //TODO:REMOVE, THIS IS A LAZY METHOD SO I DON'T HAVE TO MANUALLY SHUTDOWN THE SERVER EVERY TIME I TEST SOMETHING.
     public void exitApp() throws RemoteException{
         if(skeleton == null){
             setSkeleton();
-            System.out.println("yep");
         }
-        System.out.println("mhm");
         skeleton.exitApp();
     }
 

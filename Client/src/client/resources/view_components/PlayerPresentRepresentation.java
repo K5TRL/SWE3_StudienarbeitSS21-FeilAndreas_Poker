@@ -19,16 +19,13 @@ public class PlayerPresentRepresentation extends VBox {
     }
 
     public void setPlayer(IPlayer player){
-        System.out.println("trying");
         try{
-            System.out.println("in the try");
             lblName.setText(player.getName());
             lblFunds.setText(""+player.getFunds());
             //TODO: ImageView should show a lable based on the action made this turn; would help to let players keep an eye on things.
             pocketCards.getStyleClass().add("small");
             pocketCards.setPlayer(player);
             pocketCards.setCardsToSmall();
-            System.out.println("We shoulda set something by now.");
             getChildren().addAll(lblName,lblFunds,pocketCards);
         }
         catch (Exception e){

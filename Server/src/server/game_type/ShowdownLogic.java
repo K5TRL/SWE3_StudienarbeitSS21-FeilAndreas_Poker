@@ -29,17 +29,11 @@ public class ShowdownLogic {
     * if he is eligible, he gets all the winnings in the pot.
     */
     public void payoutAllPots() throws RemoteException {
-        //stream.findFirst()?
         createHierarchy();
-        System.out.println("We try!");
         for(Pot pot : PokerTable.getInstance().getAllPotsInPlay()){
-            System.out.println("We got a pot!");
             for(Player player : hierarchyOfPlayers){
-                System.out.println("We got a player!");
                 if(pot.getPlayersEligibleForWinnings().contains(player)){
-                    System.out.println("We want to pay player:\t"+player.getName()+pot.getAmountOfWinningsInPot());
                     pot.payoutTo(player);
-
                 }
             }
         }

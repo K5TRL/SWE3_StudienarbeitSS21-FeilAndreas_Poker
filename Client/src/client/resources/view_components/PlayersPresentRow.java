@@ -14,9 +14,7 @@ public class PlayersPresentRow extends HBox {
         try{
             for(IPlayer player : ClientStub.getInstance().getPlayerManagement().getAllIPlayers()){
                 var playerPresentRepresentation = new PlayerPresentRepresentation();
-                System.out.println("Tryint to set Player.");
                 playerPresentRepresentation.setPlayer(player);
-                System.out.println("Player hath been set.");
                 getChildren().add(playerPresentRepresentation);
             }
         }

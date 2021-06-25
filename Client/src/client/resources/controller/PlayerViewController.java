@@ -200,7 +200,6 @@ public class PlayerViewController extends ViewController{
                     disableAllButtons();
                     communityRow.setCommunityCards(ClientStub.getInstance().getCommunityCards());
                     update();
-                    System.out.println("The Player is still folded:\t"+ClientStub.getInstance().getThePlayer().hasFolded());
                 }
                 catch (Exception e){
                     e.printStackTrace();

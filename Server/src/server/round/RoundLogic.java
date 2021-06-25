@@ -9,9 +9,6 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 public class RoundLogic extends UnicastRemoteObject implements IRoundLogic {
-//    private Player currentDealer;
-//    private Player smallBlind;
-//    private Player bigBlind;
 
     //IMPORTANT FOR GAMETYPE
     private int currentBettingRoundNumber;
@@ -50,7 +47,6 @@ public class RoundLogic extends UnicastRemoteObject implements IRoundLogic {
     }
 
     public void newSingleBettingRound() throws RemoteException{
-        //PokerTable.getInstance().addPotToTable(currentRound.get);
         PokerTable.getInstance().addPotToTable(RoundLogic.getInstance().getCurrentBettingRound().getCurrentPot());
         currentRound = new SingleBettingRound();
         currentBettingRoundNumber++;
@@ -60,16 +56,9 @@ public class RoundLogic extends UnicastRemoteObject implements IRoundLogic {
         if(currentBettingRoundNumber < GameLogic.getInstance().getCurrentGameBeingPlayed().getAmountOfBettingRoundsAllowedPerGame()){
             currentBettingRoundNumber++;
             GameLogic.getInstance().prepareNewRound();
-            //GameLogic.getInstance().getCurrentGameBeingPlayed().moveToNextRound();
         }
     }
 
-//    public Player getSmallBlindPlayer(){
-//        return smallBlind;
-//    }
-//    public Player getBigBlindPlayer(){
-//        return bigBlind;
-//    }
     public SingleBettingRound getCurrentBettingRound(){
         return currentRound;
     }

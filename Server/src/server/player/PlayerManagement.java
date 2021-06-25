@@ -18,7 +18,6 @@ public class PlayerManagement extends UnicastRemoteObject implements IPlayerMana
 
     private PlayerManagement() throws RemoteException {
         super();
-        //setDealerAndBlindsForNewGame();
     }
     public static PlayerManagement getInstance() throws RemoteException {
         if(instance==null){
@@ -63,9 +62,4 @@ public class PlayerManagement extends UnicastRemoteObject implements IPlayerMana
     public IPlayer getPlayer(String name) throws RemoteException {
         return allPlayers.stream().filter(player -> player.getName().equals(name)).findFirst().orElse(null);
     }
-
-//    @Override
-//    public IPlayerManagement getPlayerManagement() throws RemoteException {
-//        return null;
-//    }
 }

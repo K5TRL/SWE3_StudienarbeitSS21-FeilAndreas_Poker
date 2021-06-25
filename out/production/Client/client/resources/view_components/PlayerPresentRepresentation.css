@@ -1,0 +1,13 @@
+PlayerPresentRepresentation{
+    -fx-alignment: center;
+    -fx-pref-height:150;
+    -fx-pref-width: 150;
+    -fx-background-color: #338333;
+    -fx-effect: dropshadow(gaussian,#153615,10,20,0,0);
+}
+Label{
+    -fx-alignment: center;
+    -fx-font-size: 20;
+    -fx-text-fill: white;
+}
+

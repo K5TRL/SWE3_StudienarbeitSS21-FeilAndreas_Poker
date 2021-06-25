@@ -1,5 +1,6 @@
 package server.table;
 
+import remoteInterfaces.IPlayer;
 import server.player.Player;
 
 import java.util.ArrayList;
@@ -9,7 +10,9 @@ public class Pot {
     private int amountOfWinningsInPot;
 
     public Pot(ArrayList playersEligibleForWinnings){
-        this.playersEligibleForWinnings = playersEligibleForWinnings;
+        this.playersEligibleForWinnings = new ArrayList<>();
+        playersEligibleForWinnings.forEach(player -> this.playersEligibleForWinnings.add((Player)player));
+        //this.playersEligibleForWinnings = playersEligibleForWinnings;
         amountOfWinningsInPot = 0;
         checkIfPotContested();
     }

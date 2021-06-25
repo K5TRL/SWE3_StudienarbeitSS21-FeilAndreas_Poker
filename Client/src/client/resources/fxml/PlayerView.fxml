@@ -12,7 +12,7 @@
     <left>
         <BorderPane fx:id="bpLeftSide">
             <top>
-                <HBox fx:id="hbPlayersPresent"/>
+                <PlayersPresentRow fx:id="playersPresent"/>
             </top>
             <center>
                 <BorderPane>

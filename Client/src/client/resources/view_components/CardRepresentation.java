@@ -16,11 +16,6 @@ public class CardRepresentation extends Label /*implements Initializable*/ {
 
     private final static String PATH_TO_IMAGES = "../images";
 
-    @FXML
-    private ImageView ivSuit;
-    @FXML
-    private Label lblValue;
-
     public CardRepresentation(){
         getStylesheets().add(this.getClass().getResource("CardRepresentation.css").toExternalForm());
     }

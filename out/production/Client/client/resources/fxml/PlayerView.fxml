@@ -12,10 +12,13 @@
     <left>
         <BorderPane fx:id="bpLeftSide">
             <top>
-                <HBox fx:id="hbPlayersPresent"/>
+                <PlayersPresentRow fx:id="playersPresent"/>
             </top>
             <center>
                 <BorderPane>
+                    <left>
+                        <Label fx:id="lblPot"/>
+                    </left>
                     <center>
                         <CommunityRow fx:id="communityRow"/>
                     </center>
@@ -42,7 +45,7 @@
                     <Button fx:id="btnRaise"/>
                     <Slider fx:id="sldrRaiseAmount"/>
                     <Label fx:id="lblPlayerBet"/>
-                    <Button fx:id="btnDealCards"/>
+                    <Button fx:id="btnDealCardsAndShowdown"/>
                 </VBox>
             </center>
             <bottom>

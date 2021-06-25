@@ -3,6 +3,7 @@ package client.resources.controller;
 import client.ClientStub;
 import client.resources.view_components.CommunityRow;
 import client.resources.view_components.PlayerHandRow;
+import client.resources.view_components.PlayersPresentRow;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
@@ -11,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -41,6 +43,8 @@ public class PlayerViewController extends ViewController{
     private PlayerHandRow playerHandRow;
     @FXML
     private CommunityRow communityRow;
+    @FXML
+    private PlayersPresentRow playersPresent;
 
     protected PlayerViewController(SceneController viewLoader, String fxmlPath) {
         super(viewLoader, fxmlPath);
@@ -65,9 +69,14 @@ public class PlayerViewController extends ViewController{
             setLabels();
             setButtons();
             setHandCards();
+            setAllPlayersPresentInGame();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setAllPlayersPresentInGame() {
+        playersPresent.setPlayersPresent();
     }
 
     private void setHandCards() {

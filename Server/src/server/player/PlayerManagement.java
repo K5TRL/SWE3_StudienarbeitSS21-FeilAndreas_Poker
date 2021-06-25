@@ -41,6 +41,12 @@ public class PlayerManagement extends UnicastRemoteObject implements IPlayerMana
         return allPlayers;
     }
 
+    public ArrayList<IPlayer> getAllIPlayers(){
+        ArrayList<IPlayer> iPlayers = new ArrayList<>();
+        allPlayers.forEach(player -> iPlayers.add(player));
+        return iPlayers;
+    }
+
     public void switchToNextDealer(){
         dealer = allPlayers.get((allPlayers.indexOf(dealer)+1)%allPlayers.size());
         bigBlind = allPlayers.get((allPlayers.indexOf(bigBlind)+1)%allPlayers.size());

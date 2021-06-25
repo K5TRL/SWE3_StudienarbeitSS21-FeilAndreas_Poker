@@ -4,3 +4,7 @@ PlayerHandRow{
     -fx-spacing: 5;
     -fx-padding: 0 50 10 0;
 }
+
+PlayerHandRow.small{
+    -fx-alignment: center_left;
+}

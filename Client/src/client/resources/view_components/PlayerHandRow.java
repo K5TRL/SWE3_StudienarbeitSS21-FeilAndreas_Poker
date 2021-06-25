@@ -44,5 +44,13 @@ public class PlayerHandRow extends HBox {
         });
     }
 
+    public void setCardsToSmall(){
+        getChildren().forEach(card ->{
+            if(card.getClass().equals(CardRepresentation.class)){
+                ((CardRepresentation) card).getStyleClass().add("small");
+            }
+        });
+    }
+
     public void clearHand(){getChildren().clear();}
 }

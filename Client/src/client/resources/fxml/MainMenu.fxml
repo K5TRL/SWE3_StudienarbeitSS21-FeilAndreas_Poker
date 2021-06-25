@@ -12,8 +12,8 @@
     <VBox fx:id="vbButtons">
         <Button fx:id="btnStartTexasHoldEm" text="Texas Hold 'Em"/>
         <Button fx:id="btnStartOmaha" text="Omaha"/>
-        <Button fx:id="btnPlayerSettings" text="Einstellungen"/>
-        <Button fx:id="btnQuitGame" text="Beenden"/>
+        <Button fx:id="btnPlayerSettings" text="Settings"/>
+        <Button fx:id="btnQuitGame" text="Exit"/>
     </VBox>
     <stylesheets>
         <URL value="@../css/global.css"/>

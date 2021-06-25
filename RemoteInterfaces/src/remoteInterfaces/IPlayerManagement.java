@@ -8,4 +8,5 @@ import java.util.List;
 public interface IPlayerManagement extends Remote {
     //IPlayerManagement getPlayerManagement() throws RemoteException;
     IPlayer getPlayer(String name) throws RemoteException;
+    ArrayList<IPlayer> getAllIPlayers() throws RemoteException;
 }

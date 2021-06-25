@@ -45,7 +45,7 @@
                     <Button fx:id="btnRaise"/>
                     <Slider fx:id="sldrRaiseAmount"/>
                     <Label fx:id="lblPlayerBet"/>
-                    <Button fx:id="btnDealCards"/>
+                    <Button fx:id="btnDealCardsAndShowdown"/>
                 </VBox>
             </center>
             <bottom>

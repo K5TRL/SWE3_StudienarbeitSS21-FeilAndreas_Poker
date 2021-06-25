@@ -158,4 +158,8 @@ public class ClientStub {
     public int getCurrentBettingRoundNumber() throws RemoteException{
         return skeleton.getRoundLogic().getCurrentBettingRoundNumber();
     }
+
+    public void resetThePlayer() throws RemoteException{
+        getThePlayer().resetBooleanFoldedForNewRound();
+    }
 }

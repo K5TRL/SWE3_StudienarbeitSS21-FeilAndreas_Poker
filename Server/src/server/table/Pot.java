@@ -50,6 +50,7 @@ public class Pot {
 
     public void payoutTo(Player player){
         player.addFunds(amountOfWinningsInPot);
+        System.out.println("Funds added to player:\t"+amountOfWinningsInPot);
         amountOfWinningsInPot = 0;
     }
 

@@ -26,7 +26,7 @@ public class PlayerViewController extends ViewController{
     @FXML
     private Button btnToMainMenu;
     @FXML
-    private Button btnDealCards;
+    private Button btnDealCardsAndShowdown;
     @FXML
     private Label lblPlayerBet;
     @FXML
@@ -57,6 +57,7 @@ public class PlayerViewController extends ViewController{
 
     private void update(){
         try {
+            disableAllButtons();
             setThePlayer();
             setListeners();
             setPlayerBetTextField();
@@ -64,7 +65,6 @@ public class PlayerViewController extends ViewController{
             setLabels();
             setButtons();
             setHandCards();
-            disableAllButtons();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -106,7 +106,7 @@ public class PlayerViewController extends ViewController{
         btnRaise.setDisable(disable);
         btnCall.setDisable(disable);
         btnFold.setDisable(disable);
-        btnDealCards.setDisable(!disable);
+        btnDealCardsAndShowdown.setDisable(!disable);
     }
 
     private void setThePlayer() throws RemoteException {
@@ -169,20 +169,36 @@ public class PlayerViewController extends ViewController{
         setToMainMenuButton();
     }
 
-    private void setDealCardsButton() {
-        btnDealCards.setText("Deal Cards");
-        btnDealCards.setOnAction(actionEvent -> {
-            try{
-                ClientStub.getInstance().startNewRound();
-                setHandCards();
-                disableAllButtons();
-                communityRow.setCommunityCards(ClientStub.getInstance().getCommunityCards());
+    private void setDealCardsButton() throws RemoteException {
+        if(ClientStub.getInstance().getCommunityCards().size() == 5){
+            btnDealCardsAndShowdown.setText("Showdown");
+            btnDealCardsAndShowdown.setOnAction(actionEvent -> {
+                try {
+                    continueToNextPlayer();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
                 update();
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            }
-        });
+            });
+        }
+        else{
+            btnDealCardsAndShowdown.setText("Deal Cards");
+            btnDealCardsAndShowdown.setOnAction(actionEvent -> {
+                try{
+                    ClientStub.getInstance().startNewRound();
+                    ClientStub.getInstance().resetThePlayer();
+                    setHandCards();
+                    disableAllButtons();
+                    communityRow.setCommunityCards(ClientStub.getInstance().getCommunityCards());
+                    update();
+                    System.out.println("The Player is still folded:\t"+ClientStub.getInstance().getThePlayer().hasFolded());
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            });
+        }
+
         try {
             //btnDealCards.setDisable(ClientStub.getInstance().getThePlayer().hasFolded());
 
@@ -201,6 +217,10 @@ public class PlayerViewController extends ViewController{
         btnCall.setText("Check");
         btnCall.setOnAction(actionEvent -> {
             try {
+                if(ClientStub.getInstance().getLatestPlacedBid() > 0){
+                    btnCall.setText("Call");
+                    ClientStub.getInstance().getThePlayer().decreaseFundsBy(ClientStub.getInstance().getLatestPlacedBid());
+                }
                 continueToNextPlayer();
                 update();
             }
@@ -260,6 +280,8 @@ public class PlayerViewController extends ViewController{
         }/*somebody has set a bet before this player in this round false*/
         else if(ClientStub.getInstance().getLatestPlacedBid() > 0){
             btnRaise.setText("Raise");
+
+            btnCall.setText("Call");
         }
         //PROBLEM: we need to somehow send this over to the server too
 

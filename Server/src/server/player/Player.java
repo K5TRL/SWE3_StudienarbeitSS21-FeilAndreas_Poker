@@ -7,6 +7,7 @@ import server.GameLogic;
 import server.card.Card;
 import server.round.RoundLogic;
 import server.table.PokerTable;
+import server.table.Pot;
 
 import java.math.RoundingMode;
 import java.rmi.RemoteException;
@@ -101,12 +102,19 @@ public class Player extends UnicastRemoteObject implements IPlayer {
     public void fold() throws RemoteException{
         folded = true;
         reactedThisRound = true;
+        for (Pot pot : PokerTable.getInstance().getAllPotsInPlay()) {
+            pot.removePlayerEligitability(this);
+        }
         System.out.println("Folded:\t"+folded);
+    }
+
+    public void resetBooleanFoldedForNewRound() {
+        folded = false;
     }
 
     public void resetThisPlayerForNewRound(){
         throwAwayHand();
-        folded = false;
+        resetBooleanFoldedForNewRound();
     }
 
     @Override

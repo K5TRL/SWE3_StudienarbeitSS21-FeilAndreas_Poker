@@ -15,4 +15,5 @@ public interface IPlayer extends Remote {
     ArrayList<ICard> getPocketCards() throws RemoteException;
     void fold() throws RemoteException;
     boolean hasFolded() throws RemoteException;
+    void resetBooleanFoldedForNewRound() throws RemoteException;
 }

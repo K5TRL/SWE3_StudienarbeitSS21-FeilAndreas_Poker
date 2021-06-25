@@ -58,5 +58,4 @@ public class ServerSkeleton extends UnicastRemoteObject implements IServerSkelet
     public ArrayList<ICard> getCardsOnTable() throws RemoteException {
         return (ArrayList<ICard>) PokerTable.getInstance().getAllCardsOnTable();
     }
-
 }

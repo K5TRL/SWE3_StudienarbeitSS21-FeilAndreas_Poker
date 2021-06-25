@@ -16,7 +16,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class GameLogic extends UnicastRemoteObject implements IGameLogic {
 
-    private int BUY_IN = 1000;
+    private int BUY_IN = 2000;
     private static GameLogic instance;
     private GameType currentGameBeingPlayed;
 
@@ -49,7 +49,7 @@ public class GameLogic extends UnicastRemoteObject implements IGameLogic {
     public void prepareNewRound() throws RemoteException {
         prepareAllCards();
         PokerTable.getInstance().clearTable();
-        resetPlayersforNewRound();
+        resetPlayersForNewRound();
         RoundLogic.getInstance().newRound();
         //always makes players pay the blinds
         currentGameBeingPlayed.executeCurrentRoundRules();
@@ -69,7 +69,7 @@ public class GameLogic extends UnicastRemoteObject implements IGameLogic {
         AllCards.getInstance().shuffleDeck();
     }
 
-    private void resetPlayersforNewRound() throws RemoteException {
+    private void resetPlayersForNewRound() throws RemoteException {
         PlayerManagement.getInstance().getAllPlayers().forEach(player -> {
             player.resetThisPlayerForNewRound();
         });

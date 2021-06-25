@@ -30,10 +30,16 @@ public class ShowdownLogic {
     */
     public void payoutAllPots() throws RemoteException {
         //stream.findFirst()?
+        createHierarchy();
+        System.out.println("We try!");
         for(Pot pot : PokerTable.getInstance().getAllPotsInPlay()){
+            System.out.println("We got a pot!");
             for(Player player : hierarchyOfPlayers){
+                System.out.println("We got a player!");
                 if(pot.getPlayersEligibleForWinnings().contains(player)){
+                    System.out.println("We want to pay player:\t"+player.getName()+pot.getAmountOfWinningsInPot());
                     pot.payoutTo(player);
+
                 }
             }
         }
@@ -45,7 +51,7 @@ public class ShowdownLogic {
         for(Player player : PlayerManagement.getInstance().getAllPlayers()){
             hierarchyOfPlayers.add(player);
         }
-        sortForHierarchy();
+        //sortForHierarchy();
     }
     //TODO: SORTING
     private void sortForHierarchy() throws RemoteException {

@@ -2,9 +2,10 @@ PlayerHandRow{
     -fx-border-color: black;
     -fx-alignment: center_right;
     -fx-spacing: 5;
-    -fx-padding: 0 50 10 0;
 }
 
 PlayerHandRow.small{
-    -fx-alignment: center_left;
+    -fx-spacing: 10;
+    -fx-padding: 10;
+    -fx-border-color: transparent;
 }

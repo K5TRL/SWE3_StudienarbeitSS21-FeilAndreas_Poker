@@ -10,6 +10,7 @@ CardRepresentation{
 }
 
 CardRepresentation.small{
-    -fx-pref-height:              50;
-    -fx-pref-width:               37;
+    -fx-border-color:          transparent;
+    -fx-min-height:              80;
+    -fx-min-width:               53;
 }

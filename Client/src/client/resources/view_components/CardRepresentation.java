@@ -37,7 +37,7 @@ public class CardRepresentation extends Label /*implements Initializable*/ {
     }
 
     public void obscure(){
-        this.setStyle(getStyle() + "-fx-background-image: url(\"../images/cardBack.png\");");
+        this.setStyle(getStyle() + "-fx-background-image: url("+this.getClass().getResource(PATH_TO_IMAGES+"/cardBack.png").toExternalForm()+");");
     }
 
 }

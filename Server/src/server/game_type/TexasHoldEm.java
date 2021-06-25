@@ -5,6 +5,7 @@ import server.player.PlayerManagement;
 import server.settings.Blinds;
 import server.card.Card;
 import server.round.RoundLogic;
+import server.table.PokerTable;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -50,30 +51,42 @@ public class TexasHoldEm extends GameType{
     }
     //public void moveToNextRound(){}
 
-    public ArrayList initiateFlop(){
+    public void initiateFlop(){
         AllCards.getInstance().burnCard();
         ArrayList<Card> list = new ArrayList();
         for(int i = 0; i<3; i++){
             list.add(AllCards.getInstance().getRandomCard());
         }
-        return list;
+        moveCardsToTable(list);
     }
 
-    public ArrayList initiateTurn(){
+    public void initiateTurn(){
         AllCards.getInstance().burnCard();
         ArrayList<Card> list = new ArrayList();
         for(int i = 0; i<1; i++){
             list.add(AllCards.getInstance().getRandomCard());
         }
-        return list;
+        moveCardsToTable(list);
     }
 
-    public ArrayList initateRiver(){
+    public void initateRiver(){
         AllCards.getInstance().burnCard();
         ArrayList<Card> list = new ArrayList();
         for(int i = 0; i<1; i++){
             list.add(AllCards.getInstance().getRandomCard());
         }
-        return list;
+        moveCardsToTable(list);
+    }
+
+    private void moveCardsToTable(ArrayList<Card> list) {
+        for (Card card : list) {
+            try {
+                PokerTable.getInstance().addCardToTable(card);
+                System.out.println("Community card added to table:\t"+card.getSuit()+card.getValue());
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 }

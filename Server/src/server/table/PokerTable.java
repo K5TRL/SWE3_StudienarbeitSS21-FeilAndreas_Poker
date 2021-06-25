@@ -1,10 +1,12 @@
 package server.table;
 
+import remoteInterfaces.ICard;
 import server.player.PlayerManagement;
 import server.card.Card;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.RandomAccess;
 
 public class PokerTable {
 
@@ -13,6 +15,7 @@ public class PokerTable {
     private ArrayList<Card> cardsOnTable;
 
     private PokerTable() throws RemoteException {
+        potsInPlay = new ArrayList<>();
         potsInPlay.add(new Pot(PlayerManagement.getInstance().getAllPlayers()));
     }
 
@@ -61,5 +64,8 @@ public class PokerTable {
         return potsInPlay;
     }
 
+    public RandomAccess getAllCardsOnTable(){
+        return cardsOnTable;
+    }
 
 }

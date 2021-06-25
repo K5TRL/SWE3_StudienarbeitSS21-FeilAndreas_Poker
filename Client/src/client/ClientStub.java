@@ -1,5 +1,6 @@
 package client;
 
+import remoteInterfaces.ICard;
 import remoteInterfaces.IPlayer;
 import remoteInterfaces.IPlayerManagement;
 import remoteInterfaces.IServerSkeleton;
@@ -7,6 +8,7 @@ import remoteInterfaces.IServerSkeleton;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 
 public class ClientStub {
     //here, all the things the client needs from the server can be gotten
@@ -143,5 +145,13 @@ public class ClientStub {
 
     public int getLatestPlacedBid() throws RemoteException{
         return skeleton.getLatestPlacedBid();
+    }
+
+    public void continueToNextPlayer() throws RemoteException{
+        skeleton.continueToNextPlayer();
+    }
+
+    public ArrayList<ICard> getCommunityCards() throws RemoteException{
+        return skeleton.getCardsOnTable();
     }
 }

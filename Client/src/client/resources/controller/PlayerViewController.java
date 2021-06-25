@@ -1,6 +1,7 @@
 package client.resources.controller;
 
 import client.ClientStub;
+import client.resources.view_components.CommunityRow;
 import client.resources.view_components.PlayerHandRow;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -36,6 +37,8 @@ public class PlayerViewController extends ViewController{
     private Label lblPlayerFunds;
     @FXML
     private PlayerHandRow playerHandRow;
+    @FXML
+    private CommunityRow communityRow;
 
     protected PlayerViewController(SceneController viewLoader, String fxmlPath) {
         super(viewLoader, fxmlPath);
@@ -188,24 +191,27 @@ public class PlayerViewController extends ViewController{
         setFoldButton();
         setRaiseButton();
     }
-    private void setPlayerBetTextField() {
-        String a = String.format("%.0f",(sldrRaiseAmount.getValue()/10));
-        int b = Integer.parseInt(a);
-        lblPlayerBet.setText(""+(b*10));
-    }
-    private void setToMainMenuButton() {
-        btnToMainMenu.setText("Exit");
-        btnToMainMenu.setOnAction(actionEvent -> getViewLoader().loadMainMenu());
-    }
     private void setCallButton() {
         btnCall.setText("Check");
+        btnCall.setOnAction(actionEvent -> {
+            try {
+                continueToNextPlayer();
+                update();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        });
     }
+
     private void setFoldButton() {
         btnFold.setText("Fold");
         btnFold.setOnAction(actionEvent -> {
             try{
                 ClientStub.getInstance().fold();
                 playerFolded.set(!playerFolded.getValue().booleanValue());
+                continueToNextPlayer();
+                update();
             }
             catch (Exception e){
                 e.printStackTrace();
@@ -216,7 +222,27 @@ public class PlayerViewController extends ViewController{
     private void setRaiseButton() throws RemoteException {
         btnRaise.setText("Bet");
         validateRaiseButtonText();
-
+        btnRaise.setOnAction(actionEvent -> {
+            try{
+                int a = ClientStub.getInstance().getThePlayer().getFunds();
+                ClientStub.getInstance().getThePlayer().decreaseFundsBy(Integer.parseInt(lblPlayerBet.getText()));
+                remainingPlayerFunds.set(a - Integer.parseInt(lblPlayerBet.getText()));
+                continueToNextPlayer();
+                update();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+    }
+    private void setPlayerBetTextField() {
+        String a = String.format("%.0f",(sldrRaiseAmount.getValue()/10));
+        int b = Integer.parseInt(a);
+        lblPlayerBet.setText(""+(b*10));
+    }
+    private void setToMainMenuButton() {
+        btnToMainMenu.setText("Exit");
+        btnToMainMenu.setOnAction(actionEvent -> getViewLoader().loadMainMenu());
     }
 
     private void validateRaiseButtonText() throws RemoteException {
@@ -230,18 +256,14 @@ public class PlayerViewController extends ViewController{
             btnRaise.setText("Raise");
         }
         //PROBLEM: we need to somehow send this over to the server too
-        btnRaise.setOnAction(actionEvent -> {
-            try{
-                int a = ClientStub.getInstance().getThePlayer().getFunds();
-                ClientStub.getInstance().getThePlayer().decreaseFundsBy(Integer.parseInt(lblPlayerBet.getText()));
-                remainingPlayerFunds.set(a - Integer.parseInt(lblPlayerBet.getText()));
-                //ClientStub.getInstance().decreaseFundsBy();
-                //thePlayer.decreaseFundsBy(Integer.parseInt(lblPlayerBet.getText()));
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            }
-        });
+
+    }
+
+    private void continueToNextPlayer() throws RemoteException {
+        ClientStub.getInstance().continueToNextPlayer();
+        if(ClientStub.getInstance().getCommunityCards() != null){
+            communityRow.setCommunityCards(ClientStub.getInstance().getCommunityCards());
+        }
     }
 
 }

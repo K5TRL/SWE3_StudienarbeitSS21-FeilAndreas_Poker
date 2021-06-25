@@ -44,6 +44,11 @@ public class RoundLogic {
         currentBettingRoundNumber++;
     }
 
+    public void newSingleBettingRound() throws RemoteException{
+        currentRound = new SingleBettingRound();
+        currentBettingRoundNumber++;
+    }
+
     public void moveToNextRound() throws RemoteException {
         if(currentBettingRoundNumber < GameLogic.getInstance().getCurrentGameBeingPlayed().getAmountOfBettingRoundsAllowedPerGame()){
             currentBettingRoundNumber++;

@@ -16,9 +16,9 @@
             </top>
             <center>
                 <BorderPane>
-                    <left></left>
-                    <top></top>
-                    <right></right>
+                    <center>
+                        <CommunityRow fx:id="communityRow"/>
+                    </center>
                     <bottom>
                         <PlayerHandRow fx:id="playerHandRow"/>
                     </bottom>

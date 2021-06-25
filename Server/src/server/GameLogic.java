@@ -53,6 +53,14 @@ public class GameLogic extends UnicastRemoteObject implements IGameLogic {
         currentGameBeingPlayed.executeCurrentRoundRules();
     }
 
+    public void prepareNewSingleBettingRound() throws RemoteException {
+        preparePlayersForNewSingleBettingRound();
+        RoundLogic.getInstance().newSingleBettingRound();
+    }
+    public void preparePlayersForNewSingleBettingRound(){
+
+    }
+
     private void prepareAllCards(){
         AllCards.getInstance().resetFullDeckOfCards();
         AllCards.getInstance().shuffleDeck();
@@ -110,7 +118,8 @@ public class GameLogic extends UnicastRemoteObject implements IGameLogic {
 
     @Override
     public void moveToNextBettingRound() throws RemoteException {
-        RoundLogic.getInstance().moveToNextRound();
+        prepareNewSingleBettingRound();
+        currentGameBeingPlayed.executeCurrentRoundRules();
     }
 
     @Override
